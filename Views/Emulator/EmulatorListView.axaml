@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GameZard.Views.EmulatorListView">
+
+    <Border BorderBrush="Black" BorderThickness="0,0,1,0" Background="White">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ListBox Name="emulatorList" Margin="0,0,0,0" SelectedIndex="3">
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Height="32"/>
+                        <TextBlock Text="Cemu" Margin="8,0"/>
+                        <Button Content="-" Width="25" Height="25" Margin="8,-15,0,0"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Height="32"/>
+                        <TextBlock Text="PPSSPP" Margin="8,0"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Height="32"/>
+                        <TextBlock Text="PCSX2" Margin="8,0"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Height="32"/>
+                        <TextBlock Text="ePSXe" Margin="8,0"/>
+                    </StackPanel>
+                </ListBoxItem>
+            </ListBox>
+        </ScrollViewer>
+    </Border>
+
+</UserControl>
