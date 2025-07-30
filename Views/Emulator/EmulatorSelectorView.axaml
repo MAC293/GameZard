@@ -2,16 +2,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:emulatorViewModels="clr-namespace:ViewModels.EmulatorViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="GameZard.Views.EmulatorSelectorView">
+             x:Class="GameZard.Views.EmulatorSelectorView"
+             x:DataType="emulatorViewModels:EmulatorSelectorViewModel">
 
     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
 
         <Button Width="40" Height="40" Margin="0,0,8,0"/>
 
-        <ComboBox Name="cmbEmulatorSelector" SelectedIndex="0" Width="140" Margin="8,5"/>
+        <ComboBox Name="cmbEmulatorSelector" ItemsSource="{Binding SelectorDomain.SelectorDTO.Emulators}" SelectedItem="{Binding SelectorDomain.SelectorDTO.Name}" SelectedIndex="0" Width="140" Margin="8,5"/>
 
-        <Button Content="+" Name="btnAddEmulator" Width="30" Height="30" Margin="4,0" />
+        <!--<Button Content="+" Name="btnAddEmulator" Command="{Binding AddEmulatorCommand}" Width="30" Height="30" Margin="4,0" />-->
 
         <Image Width="32" Height="32" />
     </StackPanel>
