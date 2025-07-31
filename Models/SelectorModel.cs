@@ -1,11 +1,12 @@
 ﻿using GameZard.Context;
+using GameZard.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace GameZard.Models
 {
