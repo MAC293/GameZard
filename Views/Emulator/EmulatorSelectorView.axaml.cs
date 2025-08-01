@@ -15,7 +15,7 @@ public partial class EmulatorSelectorView : UserControl
 
         EmulatorSelectorViewModel = new EmulatorSelectorViewModel();
         LoadSelector();
-        //cmbEmulatorSelector.SelectedIndex = 0; 
+        cmbEmulatorSelector.SelectedIndex = 0; 
         DataContext = EmulatorSelectorViewModel;
     }
 
