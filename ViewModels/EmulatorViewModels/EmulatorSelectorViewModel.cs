@@ -7,17 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
+using GameZard.DTO;
 
 namespace ViewModels.EmulatorViewModels
 {
-    public class EmulatorSelectorViewModel
+    public partial class EmulatorSelectorViewModel
     {
         private SelectorDomain _SelectorDomain;
-        
 
         public EmulatorSelectorViewModel()
         {
             SelectorDomain = new SelectorDomain();
+
+            SelectorDomain.SelectorDTO.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(SelectorDomain.SelectorDTO.Name))
+                {
+                    AddEmulatorCommand.NotifyCanExecuteChanged();
+                }
+            };
         }
 
         public SelectorDomain SelectorDomain
@@ -26,6 +34,7 @@ namespace ViewModels.EmulatorViewModels
             set { _SelectorDomain = value; }
         }
 
+
         public ObservableCollection<String> FormattedEmulators()
         {
             var emulators = SelectorDomain.SelectorDTO.Emulators;
@@ -33,5 +42,25 @@ namespace ViewModels.EmulatorViewModels
             return NameFormatter.FormatEmulatorNames(emulators);
 
         }
+
+        [RelayCommand(CanExecute = nameof(CanAddEmulator))]
+        public async Task AddEmulator()
+        {
+            String selectedEmulator = SelectorDomain.SelectorDTO.Name.Trim();
+            String unformattedEmulator = NameFormatter.UnformatEmulatorName(selectedEmulator);
+
+            await SelectorDomain.SelectorModel.SelectEmulatorAsync(unformattedEmulator);
+        }
+
+        private Boolean CanAddEmulator()
+        {
+            if (SelectorDomain.SelectorDTO.Name != "Select emulator")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

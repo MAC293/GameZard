@@ -36,13 +36,17 @@ namespace GameZard.Domain
             SelectorDTO.Emulators = SelectorModel.EmulatorNames();
         }
 
-        //public void EmulatorsPlaceholder()
-        //{
-        //    var emulators = SelectorDTO.Emulators;
+        public void EmulatorsPlaceholder()
+        {
+            var emulators = SelectorDTO.Emulators;
+            if (!emulators.Contains("Select emulator"))
+            {
+                emulators.Insert(0, "Select emulator");
+            }
 
-        //    emulators.Insert(0, "Select emulator");
+            SelectorDTO.Name = "Select emulator";
 
-        //    SelectorDTO.Emulators = emulators;
-        //}
+            SelectorDTO.Emulators = emulators;
+        }
     }
 }

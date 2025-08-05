@@ -31,35 +31,5 @@ namespace GameZard.DTO
         {
             Emulators = new ObservableCollection<String>();
         }
-
-        //public String Name
-        //{
-        //    get { return _Name; }
-        //    set { _Name = value; }
-        //}
-
-        //public Byte[] Icon
-        //{
-        //    get { return _Icon; }
-        //    set { _Icon = value; }
-        //}
-
-        //public String Console
-        //{
-        //    get { return _Console; }
-        //    set { _Console = value; }
-        //}
-
-        //public String ExecutableLocation
-        //{
-        //    get { return _ExecutableLocation; }
-        //    set { _ExecutableLocation = value; }
-        //}
-
-        //public ObservableCollection<String> Emulators
-        //{
-        //    get { return _Emulators; }
-        //    set { _Emulators = value; }
-        //}
     }
 }
