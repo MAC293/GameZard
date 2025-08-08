@@ -19,6 +19,17 @@ namespace GameZard
                 desktop.MainWindow = new EmulatorView();
             }
 
+            /*
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            { 
+                desktop.MainWindow = new EmulatorView();
+                {
+                    DataContext = EmulatorSelectorViewModel;
+                };
+
+            }
+            */
+
             base.OnFrameworkInitializationCompleted();
         }
     }

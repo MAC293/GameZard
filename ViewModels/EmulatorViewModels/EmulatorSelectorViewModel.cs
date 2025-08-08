@@ -18,14 +18,10 @@ namespace ViewModels.EmulatorViewModels
         public EmulatorSelectorViewModel()
         {
             SelectorDomain = new SelectorDomain();
+            PropertyChangedNamee();
 
-            SelectorDomain.SelectorDTO.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == nameof(SelectorDomain.SelectorDTO.Name))
-                {
-                    AddEmulatorCommand.NotifyCanExecuteChanged();
-                }
-            };
+
+
         }
 
         public SelectorDomain SelectorDomain
@@ -60,6 +56,17 @@ namespace ViewModels.EmulatorViewModels
             }
 
             return false;
+        }
+
+        private void PropertyChangedNamee()
+        {
+            SelectorDomain.SelectorDTO.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(SelectorDomain.SelectorDTO.Name))
+                {
+                    AddEmulatorCommand.NotifyCanExecuteChanged();
+                }
+            };
         }
 
     }
