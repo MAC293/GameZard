@@ -12,7 +12,7 @@ namespace GameZard.Services
         //Remove underscores from emulators name, and format specific names (Dolphin's)
         public static ObservableCollection<String> FormatEmulatorNames(ObservableCollection<String> emulators)
         {
-            var formatted = new ObservableCollection<string>();
+            var formatted = new ObservableCollection<String>();
 
             foreach (var emulator in emulators)
             {
@@ -33,7 +33,7 @@ namespace GameZard.Services
             return formatted;
         }
 
-        //Bring emulators list back to the original format
+        //Bring emulator name to its original format
         public static String UnformatEmulatorName(String selectedEmulator)
         {
             String nintendoFormatted = String.Empty;
@@ -49,6 +49,29 @@ namespace GameZard.Services
             else if (selectedEmulator.Trim() != "Dolphin (Wii)" || selectedEmulator != "Dolphin (GameCube)")
             {
                 String otherFormatted = selectedEmulator.Replace(" ", "_");
+
+                return otherFormatted;
+            }
+
+            return nintendoFormatted;
+        }
+
+        //Remove underscores from emulator name, and format specific name (Dolphin's)
+        public static String FormatEmulatorName(String selectedEmulator)
+        {
+            String nintendoFormatted = String.Empty;
+
+            if (selectedEmulator.Trim() == "Dolphin_Wii")
+            {
+                nintendoFormatted = "Dolphin (Wii)";
+            }
+            else if (selectedEmulator.Trim() == "Dolphin_GameCube")
+            {
+                nintendoFormatted = "Dolphin (GameCube)";
+            }
+            else if (selectedEmulator.Trim() != "Dolphin (Wii)" || selectedEmulator != "Dolphin (GameCube)")
+            {
+                String otherFormatted = selectedEmulator.Replace("_", " ");
 
                 return otherFormatted;
             }

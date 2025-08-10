@@ -14,14 +14,12 @@ namespace ViewModels.EmulatorViewModels
     public partial class EmulatorSelectorViewModel
     {
         private SelectorDomain _SelectorDomain;
+        public event EventHandler<EmulatorDTO> EmulatorSelected;
 
         public EmulatorSelectorViewModel()
         {
             SelectorDomain = new SelectorDomain();
             PropertyChangedNamee();
-
-
-
         }
 
         public SelectorDomain SelectorDomain
@@ -30,10 +28,9 @@ namespace ViewModels.EmulatorViewModels
             set { _SelectorDomain = value; }
         }
 
-
         public ObservableCollection<String> FormattedEmulators()
         {
-            var emulators = SelectorDomain.SelectorDTO.Emulators;
+            var emulators = SelectorDomain.EmulatorDTO.Emulators;
 
             return NameFormatter.FormatEmulatorNames(emulators);
 
@@ -42,15 +39,22 @@ namespace ViewModels.EmulatorViewModels
         [RelayCommand(CanExecute = nameof(CanAddEmulator))]
         public async Task AddEmulator()
         {
-            String selectedEmulator = SelectorDomain.SelectorDTO.Name.Trim();
+            String selectedEmulator = SelectorDomain.EmulatorDTO.Name.Trim();
             String unformattedEmulator = NameFormatter.UnformatEmulatorName(selectedEmulator);
 
+            //Change emulator selected property to true in the database
             await SelectorDomain.SelectorModel.SelectEmulatorAsync(unformattedEmulator);
+
+            //Return the name and icon from the selected emulator
+            var emulatorSelectedModel = await SelectorDomain.SelectorModel.SelectedEmulatorAsync(unformattedEmulator);
+
+            //Send the selected emulator to the event handler thus to the EmulatorListViewModel
+            EmulatorSelected.Invoke(this, emulatorSelectedModel);
         }
 
         private Boolean CanAddEmulator()
         {
-            if (SelectorDomain.SelectorDTO.Name != "Select emulator")
+            if (SelectorDomain.EmulatorDTO.Name != "Select emulator")
             {
                 return true;
             }
@@ -60,9 +64,9 @@ namespace ViewModels.EmulatorViewModels
 
         private void PropertyChangedNamee()
         {
-            SelectorDomain.SelectorDTO.PropertyChanged += (s, e) =>
+            SelectorDomain.EmulatorDTO.PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName == nameof(SelectorDomain.SelectorDTO.Name))
+                if (e.PropertyName == nameof(SelectorDomain.EmulatorDTO.Name))
                 {
                     AddEmulatorCommand.NotifyCanExecuteChanged();
                 }

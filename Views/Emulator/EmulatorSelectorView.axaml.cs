@@ -27,7 +27,7 @@ public partial class EmulatorSelectorView : UserControl
     public void LoadSelector()
     {
         EmulatorSelectorViewModel.SelectorDomain.LoadEmulators();
-        EmulatorSelectorViewModel.SelectorDomain.SelectorDTO.Emulators = EmulatorSelectorViewModel.FormattedEmulators();
+        EmulatorSelectorViewModel.SelectorDomain.EmulatorDTO.Emulators = EmulatorSelectorViewModel.FormattedEmulators();
         EmulatorSelectorViewModel.SelectorDomain.EmulatorsPlaceholder();
 
     }

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameZard.Services;
 
 namespace GameZard.Models
 {
@@ -72,6 +73,31 @@ namespace GameZard.Models
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Exception in SelectEmulatorAsync: {ex}");
+            }
+        }
+
+        //Return the selected emulator name and icon
+        public async Task<EmulatorDTO> SelectedEmulatorAsync(String emulatorName)
+        {
+            try
+            {
+                var emulator = await Context.Emulators.FirstOrDefaultAsync(emulator => emulator.Name.Trim() == emulatorName);
+
+                if (emulator != null)
+                {
+                    return new EmulatorDTO()
+                    {
+                        Name = NameFormatter.FormatEmulatorName(emulator.Name.Trim()),
+                        Icon = emulator.Icon
+                    };
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Exception in GetSelectedEmulatorAsync: {ex}");
+                return null;
             }
         }
     }
