@@ -19,7 +19,7 @@ namespace ViewModels.EmulatorViewModels
         public EmulatorSelectorViewModel()
         {
             SelectorDomain = new SelectorDomain();
-            PropertyChangedNamee();
+            PropertyChangedName();
         }
 
         public SelectorDomain SelectorDomain
@@ -49,7 +49,7 @@ namespace ViewModels.EmulatorViewModels
             var emulatorSelectedModel = await SelectorDomain.SelectorModel.SelectedEmulatorAsync(unformattedEmulator);
 
             //Send the selected emulator to the event handler thus to the EmulatorListViewModel
-            EmulatorSelected.Invoke(this, emulatorSelectedModel);
+             EmulatorSelected.Invoke(this, emulatorSelectedModel);
         }
 
         private Boolean CanAddEmulator()
@@ -62,7 +62,7 @@ namespace ViewModels.EmulatorViewModels
             return false;
         }
 
-        private void PropertyChangedNamee()
+        private void PropertyChangedName()
         {
             SelectorDomain.EmulatorDTO.PropertyChanged += (s, e) =>
             {

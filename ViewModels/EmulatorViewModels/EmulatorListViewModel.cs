@@ -4,23 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameZard.Domain;
 using ViewModels.EmulatorViewModels;
 
 namespace GameZard.ViewModels.EmulatorViewModels
 {
     public class EmulatorListViewModel
     {
-        private EmulatorDTO _EmulatorDisplay;
+        private ListDomain _ListDomain;
 
         public EmulatorListViewModel()
         {
-            
+            ListDomain = new ListDomain();
         }
 
-        public EmulatorDTO EmulatorDisplay
+        public ListDomain ListDomain
         {
-            get { return _EmulatorDisplay; }
-            set { _EmulatorDisplay = value; }
+            get { return _ListDomain; }
+            set { _ListDomain = value; }
         }
     }
 }

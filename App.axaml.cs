@@ -1,7 +1,9 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using GameZard.ViewModels.EmulatorViewModels;
 using GameZard.Views;
+using ViewModels.EmulatorViewModels;
 
 namespace GameZard
 {
@@ -17,20 +19,11 @@ namespace GameZard
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new EmulatorView();
-            }
-
-            /*
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            { 
-                desktop.MainWindow = new EmulatorView();
-                {
-                    DataContext = EmulatorSelectorViewModel;
-                };
 
             }
-            */
 
             base.OnFrameworkInitializationCompleted();
         }
+
     }
 }

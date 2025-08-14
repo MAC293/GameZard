@@ -27,9 +27,13 @@ namespace GameZard.DTO
         [ObservableProperty]
         private ObservableCollection<String> _Emulators;
 
+        [ObservableProperty]
+        private ObservableCollection<EmulatorDTO> _SelectedEmulators;
+
         public EmulatorDTO()
         {
             Emulators = new ObservableCollection<String>();
+            SelectedEmulators = new ObservableCollection<EmulatorDTO>();
         }
     }
 }

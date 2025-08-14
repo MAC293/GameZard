@@ -36,7 +36,7 @@ namespace ViewModels.EmulatorViewModels
 
         private void OnEmulatorSelected(Object sender, EmulatorDTO dto)
         {
-            ELVM.EmulatorDisplay = dto;
+            ELVM.ListDomain.EmulatorDTO = dto;
         }
     }
 }
