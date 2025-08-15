@@ -71,7 +71,7 @@ namespace GameZard.Services
             }
             else if (selectedEmulator.Trim() != "Dolphin (Wii)" || selectedEmulator != "Dolphin (GameCube)")
             {
-                String otherFormatted = selectedEmulator.Replace("_", " ");
+                String otherFormatted = selectedEmulator.Replace("_", " ").Trim();
 
                 return otherFormatted;
             }

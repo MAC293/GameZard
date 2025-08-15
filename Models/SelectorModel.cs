@@ -85,7 +85,7 @@ namespace GameZard.Models
                 {
                     return new EmulatorDTO()
                     {
-                        Name = NameFormatter.FormatEmulatorName(emulator.Name.Trim()),
+                        Name = NameFormatter.FormatEmulatorName(emulator.Name),
                         Icon = emulator.Icon
                     };
                 }
