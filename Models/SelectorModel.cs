@@ -1,5 +1,6 @@
 ﻿using GameZard.Context;
 using GameZard.DTO;
+using GameZard.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameZard.Services;
+using Logger;
 
 namespace GameZard.Models
 {
@@ -83,6 +84,8 @@ namespace GameZard.Models
 
                 if (emulator != null)
                 {
+                    Recorder.WriteInfo(emulator.Name);
+
                     return new EmulatorDTO()
                     {
                         Name = NameFormatter.FormatEmulatorName(emulator.Name),

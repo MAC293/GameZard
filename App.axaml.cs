@@ -19,8 +19,9 @@ namespace GameZard
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new EmulatorView();
-
             }
+
+            //Logger.Recorder.Initialize();
 
             base.OnFrameworkInitializationCompleted();
         }
