@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using GameZard.ViewModels.EmulatorViewModels;
 using GameZard.Views;
+using Serilog;
 using ViewModels.EmulatorViewModels;
 
 namespace GameZard
@@ -12,6 +13,15 @@ namespace GameZard
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                //.MinimumLevel.Debug()
+                .WriteTo.Console()
+                //.WriteTo.File("E:/Programming/Business Projects/GameZard Project/Log.txt")
+                .CreateLogger();
+
+            //Log.Information("Log initialized");
         }
 
         public override void OnFrameworkInitializationCompleted()
@@ -20,8 +30,6 @@ namespace GameZard
             {
                 desktop.MainWindow = new EmulatorView();
             }
-
-            //Logger.Recorder.Initialize();
 
             base.OnFrameworkInitializationCompleted();
         }

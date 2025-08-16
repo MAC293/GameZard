@@ -8,7 +8,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Logger;
+using Serilog;
+
 
 namespace GameZard.Models
 {
@@ -84,7 +85,8 @@ namespace GameZard.Models
 
                 if (emulator != null)
                 {
-                    Recorder.WriteInfo(emulator.Name);
+                    Log.Information($"emulator: {emulator.Name}");
+                    Log.Information($"emulator: {emulator.Icon}");
 
                     return new EmulatorDTO()
                     {

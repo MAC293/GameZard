@@ -1,13 +1,15 @@
-﻿using GameZard.Domain;
+﻿using CommunityToolkit.Mvvm.Input;
+using GameZard.Context;
+using GameZard.Domain;
+using GameZard.DTO;
 using GameZard.Services;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Input;
-using GameZard.DTO;
 
 namespace ViewModels.EmulatorViewModels
 {
@@ -48,8 +50,10 @@ namespace ViewModels.EmulatorViewModels
             //Return the name and icon from the selected emulator
             var emulatorSelectedModel = await SelectorDomain.SelectorModel.SelectedEmulatorAsync(unformattedEmulator);
 
+            Log.Information($"emulatorSelectedModel: {emulatorSelectedModel}");
+
             //Send the selected emulator to the event handler thus to the EmulatorListViewModel
-             EmulatorSelected.Invoke(this, emulatorSelectedModel);
+            EmulatorSelected.Invoke(this, emulatorSelectedModel);
         }
 
         private Boolean CanAddEmulator()
