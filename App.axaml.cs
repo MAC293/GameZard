@@ -15,8 +15,8 @@ namespace GameZard
             AvaloniaXamlLoader.Load(this);
 
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
-                //.MinimumLevel.Debug()
+                //.MinimumLevel.Information()
+                .MinimumLevel.Debug()
                 .WriteTo.Console()
                 //.WriteTo.File("E:/Programming/Business Projects/GameZard Project/Log.txt")
                 .CreateLogger();

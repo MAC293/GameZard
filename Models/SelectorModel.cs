@@ -88,11 +88,15 @@ namespace GameZard.Models
                     Log.Information($"emulator: {emulator.Name}");
                     Log.Information($"emulator: {emulator.Icon}");
 
-                    return new EmulatorDTO()
+                    var selectedEmulator = new EmulatorDTO()
                     {
                         Name = NameFormatter.FormatEmulatorName(emulator.Name),
                         Icon = emulator.Icon
                     };
+
+                    Log.Information($"selectedEmulator: {selectedEmulator.Name} {selectedEmulator.Icon}");
+
+                    return selectedEmulator;
                 }
 
                 return null;

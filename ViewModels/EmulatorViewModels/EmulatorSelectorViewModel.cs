@@ -16,7 +16,7 @@ namespace ViewModels.EmulatorViewModels
     public partial class EmulatorSelectorViewModel
     {
         private SelectorDomain _SelectorDomain;
-        public event EventHandler<EmulatorDTO> EmulatorSelected;
+        public event EventHandler<EmulatorDTO> OnEmulatorSelectedDTO;
 
         public EmulatorSelectorViewModel()
         {
@@ -52,8 +52,14 @@ namespace ViewModels.EmulatorViewModels
 
             Log.Information($"emulatorSelectedModel: {emulatorSelectedModel}");
 
-            //Send the selected emulator to the event handler thus to the EmulatorListViewModel
-            EmulatorSelected.Invoke(this, emulatorSelectedModel);
+            if (emulatorSelectedModel != null)
+            {
+                //!: null-forgiving operator to ensure that OnEmulatorSelectedDTO is not null before invoking it. The value must be 100% not null
+                //Send the selected emulator to the event handler thus to the EmulatorListViewModel
+                OnEmulatorSelectedDTO?.Invoke(this, emulatorSelectedModel!);
+            }
+
+            Log.Information($"emulatorSelectedModel on Invoke: {emulatorSelectedModel.Name} {emulatorSelectedModel.Icon}");
         }
 
         private Boolean CanAddEmulator()
