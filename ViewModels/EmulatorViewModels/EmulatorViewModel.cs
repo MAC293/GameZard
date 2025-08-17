@@ -16,10 +16,9 @@ namespace ViewModels.EmulatorViewModels
 
         public EmulatorViewModel()
         {
-            ELVM = new EmulatorListViewModel();
             ESVM = new EmulatorSelectorViewModel();
+            ELVM = new EmulatorListViewModel();
             ESVM.OnEmulatorSelectedDTO += OnEmulatorSelected;
-
         }
 
         public EmulatorListViewModel ELVM
