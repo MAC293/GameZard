@@ -1,5 +1,6 @@
 ﻿using GameZard.DTO;
 using GameZard.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace GameZard.Domain
         public void LoadEmulators()
         {
             EmulatorDTO.SelectedEmulators.Add(EmulatorDTO);
+            Log.Information($"EmulatorDTO.SelectedEmulators.Add(EmulatorDTO): {EmulatorDTO}");
         }
     }
 }

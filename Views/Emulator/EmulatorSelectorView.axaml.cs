@@ -12,7 +12,6 @@ public partial class EmulatorSelectorView : UserControl
     public EmulatorSelectorView()
     {
         InitializeComponent();
-
         EmulatorSelectorViewModel = new EmulatorSelectorViewModel();
         LoadSelector();
         DataContext = EmulatorSelectorViewModel;

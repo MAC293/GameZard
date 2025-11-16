@@ -85,8 +85,8 @@ namespace GameZard.Models
 
                 if (emulator != null)
                 {
-                    Log.Information($"emulator: {emulator.Name}");
-                    Log.Information($"emulator: {emulator.Icon}");
+                    //Log.Information($"emulator: {emulator.Name}");
+                    //Log.Information($"emulator: {emulator.Icon}");
 
                     var selectedEmulator = new EmulatorDTO()
                     {
@@ -94,7 +94,7 @@ namespace GameZard.Models
                         Icon = emulator.Icon
                     };
 
-                    Log.Information($"selectedEmulator: {selectedEmulator.Name} {selectedEmulator.Icon}");
+                    //Log.Information($"selectedEmulator: {selectedEmulator.Name} {selectedEmulator.Icon}");
 
                     return selectedEmulator;
                 }

@@ -50,16 +50,18 @@ namespace ViewModels.EmulatorViewModels
             //Return the name and icon from the selected emulator
             var emulatorSelectedModel = await SelectorDomain.SelectorModel.SelectedEmulatorAsync(unformattedEmulator);
 
-            Log.Information($"emulatorSelectedModel: {emulatorSelectedModel}");
+            Log.Information($"SelectedEmulatorAsync(): {emulatorSelectedModel}");
 
             if (emulatorSelectedModel != null)
             {
                 //!: null-forgiving operator to ensure that OnEmulatorSelectedDTO is not null before invoking it. The value must be 100% not null
                 //Send the selected emulator to the event handler thus to the EmulatorListViewModel
                 OnEmulatorSelectedDTO?.Invoke(this, emulatorSelectedModel!);
-            }
 
-            Log.Information($"emulatorSelectedModel on Invoke: {emulatorSelectedModel.Name} {emulatorSelectedModel.Icon}");
+                Log.Information($"EmulatorSelectorViewModel instance hash: {GetHashCode()}");
+
+                Log.Information($"emulatorSelectedModel on Invoke: {emulatorSelectedModel.Name} {emulatorSelectedModel.Icon}");
+            }
         }
 
         private Boolean CanAddEmulator()
