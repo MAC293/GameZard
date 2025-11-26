@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using GameZard.Services;
 using GameZard.ViewModels.EmulatorViewModels;
 using ViewModels.EmulatorViewModels;
 

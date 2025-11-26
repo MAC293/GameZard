@@ -1,6 +1,7 @@
 ﻿using GameZard.Domain;
 using GameZard.DTO;
 using GameZard.Models;
+using GameZard.Services;
 using GameZard.ViewModels.EmulatorViewModels;
 using Serilog;
 using System;
@@ -13,7 +14,7 @@ namespace ViewModels.EmulatorViewModels
 {
     public class EmulatorViewModel
     {
-        private EmulatorListViewModel _ELVM; 
+        private EmulatorListViewModel _ELVM;
         private EmulatorSelectorViewModel _ESVM; 
 
         public EmulatorViewModel()
@@ -21,6 +22,7 @@ namespace ViewModels.EmulatorViewModels
             ESVM = new EmulatorSelectorViewModel();
             ELVM = new EmulatorListViewModel();
             ESVM.OnEmulatorSelectedDTO += OnEmulatorSelected;
+
         }
 
         public EmulatorListViewModel ELVM
