@@ -1,4 +1,5 @@
-﻿using GameZard.Domain;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using GameZard.Domain;
 using GameZard.DTO;
 using GameZard.Models;
 using GameZard.Services;
@@ -19,9 +20,16 @@ namespace ViewModels.EmulatorViewModels
 
         public EmulatorViewModel()
         {
-            ESVM = new EmulatorSelectorViewModel();
+            //ESVM = new EmulatorSelectorViewModel();
             ELVM = new EmulatorListViewModel();
-            ESVM.OnEmulatorSelectedDTO += OnEmulatorSelected;
+            //ESVM.OnEmulatorSelectedDTO += OnEmulatorSelected;
+
+            WeakReferenceMessenger.Default.Register<EmulatorSelectedMessage>(this, (recipient, message) =>
+            {
+                ELVM.ListDomain.EmulatorDTO = message.Emulator;
+                //Log.Information($"message.Emulator: {message.Emulator}");
+                ELVM.ListDomain.LoadEmulators();
+            });
 
         }
 
@@ -37,15 +45,16 @@ namespace ViewModels.EmulatorViewModels
             set { _ESVM = value; }
         }
 
-        public void OnEmulatorSelected(Object sender, EmulatorDTO dto)
-        {
-            ELVM.ListDomain.EmulatorDTO = dto;
+        //public void OnEmulatorSelected(Object sender, EmulatorDTO dto)
+        //{
+        //    ELVM.ListDomain.EmulatorDTO = dto;
 
-            Log.Information($"dto on OnEmulatorSelected on EmulatorViewModel: {dto.Name} {dto.Icon}");
-            ELVM.ListDomain.LoadEmulators();
+        //    Log.Information($"dto on OnEmulatorSelected on EmulatorViewModel: {dto.Name} {dto.Icon}");
+        //    ELVM.ListDomain.LoadEmulators();
 
-            Log.Information($"EmulatorViewModel instance hash: {GetHashCode()}");
+        //    Log.Information($"EmulatorViewModel instance hash: {GetHashCode()}");
 
-        }
+        //}
+
     }
 }

@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace ViewModels.EmulatorViewModels
 {
@@ -50,17 +52,19 @@ namespace ViewModels.EmulatorViewModels
             //Return the name and icon from the selected emulator
             var emulatorSelectedModel = await SelectorDomain.SelectorModel.SelectedEmulatorAsync(unformattedEmulator);
 
-            Log.Information($"SelectedEmulatorAsync(): {emulatorSelectedModel}");
+            //Log.Information($"SelectedEmulatorAsync(): {emulatorSelectedModel}");
 
             if (emulatorSelectedModel != null)
             {
                 //!: null-forgiving operator to ensure that OnEmulatorSelectedDTO is not null before invoking it. The value must be 100% not null
                 //Send the selected emulator to the event handler thus to the EmulatorListViewModel
-                OnEmulatorSelectedDTO?.Invoke(this, emulatorSelectedModel!);
+                //OnEmulatorSelectedDTO?.Invoke(this, emulatorSelectedModel!);
 
-                Log.Information($"EmulatorSelectorViewModel instance hash: {GetHashCode()}");
+                //Log.Information($"EmulatorSelectorViewModel instance hash: {GetHashCode()}");
 
-                Log.Information($"emulatorSelectedModel on Invoke: {emulatorSelectedModel.Name} {emulatorSelectedModel.Icon}");
+                //Log.Information($"emulatorSelectedModel on Invoke: {emulatorSelectedModel.Name} {emulatorSelectedModel.Icon}");
+
+                WeakReferenceMessenger.Default.Send(new EmulatorSelectedMessage(emulatorSelectedModel));
             }
         }
 

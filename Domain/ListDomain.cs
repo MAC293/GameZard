@@ -35,7 +35,8 @@ namespace GameZard.Domain
         public void LoadEmulators()
         {
             EmulatorDTO.SelectedEmulators.Add(EmulatorDTO);
-            Log.Information($"EmulatorDTO.SelectedEmulators.Add(EmulatorDTO): {EmulatorDTO}");
+            
+            //Log.Information($"EmulatorDTO.SelectedEmulators.Add(EmulatorDTO): {EmulatorDTO}");
         }
     }
 }

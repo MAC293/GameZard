@@ -88,15 +88,18 @@ namespace GameZard.Models
                     //Log.Information($"emulator: {emulator.Name}");
                     //Log.Information($"emulator: {emulator.Icon}");
 
-                    var selectedEmulator = new EmulatorDTO()
+                    if (emulator.Icon != null && emulator.Icon.Length > 0)
                     {
-                        Name = NameFormatter.FormatEmulatorName(emulator.Name),
-                        Icon = emulator.Icon
-                    };
+                        var selectedEmulator = new EmulatorDTO()
+                        {
+                            Name = NameFormatter.FormatEmulatorName(emulator.Name),
+                            Icon = emulator.Icon
+                        };
 
-                    //Log.Information($"selectedEmulator: {selectedEmulator.Name} {selectedEmulator.Icon}");
+                        Log.Information($"SelectedEmulatorAsync(): {selectedEmulator.Name} {selectedEmulator.Icon}");
 
-                    return selectedEmulator;
+                        return selectedEmulator;
+                    }
                 }
 
                 return null;
