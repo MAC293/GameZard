@@ -11,4 +11,6 @@ using ViewModels.EmulatorViewModels;
 namespace GameZard.Services
 {
     public record EmulatorSelectedMessage(EmulatorDTO Emulator);
+
+
 }

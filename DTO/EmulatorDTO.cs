@@ -15,7 +15,7 @@ namespace GameZard.DTO
         private String _Name;
 
         [ObservableProperty]
-        private Byte[] _Icon;
+        public Byte[]? _Icon;
 
         [ObservableProperty]
         private String _Console;
@@ -24,10 +24,10 @@ namespace GameZard.DTO
         private String _ExecutableLocation;
 
         [ObservableProperty]
-        private ObservableCollection<String> _Emulators;
+        public ObservableCollection<String> _Emulators;
 
         [ObservableProperty]
-        private ObservableCollection<EmulatorDTO> _SelectedEmulators;
+        public ObservableCollection<EmulatorDTO> _SelectedEmulators;
 
         public EmulatorDTO()
         {

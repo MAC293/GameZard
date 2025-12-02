@@ -24,11 +24,24 @@ namespace ViewModels.EmulatorViewModels
             ELVM = new EmulatorListViewModel();
             //ESVM.OnEmulatorSelectedDTO += OnEmulatorSelected;
 
+            //WeakReferenceMessenger.Default.Register<EmulatorSelectedMessage>(this, (recipient, message) =>
+            //{
+
+            //    ELVM.ListDomain.EmulatorDTO = message.Emulator;
+            //    Log.Information($"message.Emulator on EmulatorViewModel: {message.Emulator}");  
+            //    ELVM.ListDomain.LoadEmulators();
+            //});
+
             WeakReferenceMessenger.Default.Register<EmulatorSelectedMessage>(this, (recipient, message) =>
             {
-                ELVM.ListDomain.EmulatorDTO = message.Emulator;
-                //Log.Information($"message.Emulator: {message.Emulator}");
-                ELVM.ListDomain.LoadEmulators();
+                Log.Information("Receiver: hash = {hash}, Name = {Name}, IconLen = {len}",
+                    this.GetHashCode(), message.Emulator?.Name, message.Emulator.Icon?.Length);
+
+                if (message.Emulator != null)
+                {
+                    ELVM.ListDomain.EmulatorDTO = message.Emulator;
+                    ELVM.ListDomain.LoadEmulators();
+                }
             });
 
         }

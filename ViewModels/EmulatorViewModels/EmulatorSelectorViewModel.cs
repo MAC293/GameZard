@@ -64,7 +64,13 @@ namespace ViewModels.EmulatorViewModels
 
                 //Log.Information($"emulatorSelectedModel on Invoke: {emulatorSelectedModel.Name} {emulatorSelectedModel.Icon}");
 
+                //WeakReferenceMessenger.Default.Send(new EmulatorSelectedMessage(emulatorSelectedModel));
+
+                //Log.Information($"emulatorSelectedModel on EmulatorSelectorViewModel: {emulatorSelectedModel.Name}");
+
                 WeakReferenceMessenger.Default.Send(new EmulatorSelectedMessage(emulatorSelectedModel));
+
+                Log.Information("Sender: hash = {hash}, Name = {Name}, IconLen = {len}", this.GetHashCode(), emulatorSelectedModel.Name, emulatorSelectedModel.Icon?.Length);
             }
         }
 
