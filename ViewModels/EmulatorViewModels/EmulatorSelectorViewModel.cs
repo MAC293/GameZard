@@ -18,7 +18,6 @@ namespace ViewModels.EmulatorViewModels
     public partial class EmulatorSelectorViewModel
     {
         private SelectorDomain _SelectorDomain;
-        public event EventHandler<EmulatorDTO> OnEmulatorSelectedDTO;
 
         public EmulatorSelectorViewModel()
         {
@@ -34,7 +33,7 @@ namespace ViewModels.EmulatorViewModels
 
         public ObservableCollection<String> FormattedEmulators()
         {
-            var emulators = SelectorDomain.EmulatorDTO.Emulators;
+            var emulators = SelectorDomain.SelectorListDomain.Emulators;
 
             return NameFormatter.FormatEmulatorNames(emulators);
 
@@ -43,40 +42,25 @@ namespace ViewModels.EmulatorViewModels
         [RelayCommand(CanExecute = nameof(CanAddEmulator))]
         public async Task AddEmulator()
         {
-            String selectedEmulator = SelectorDomain.EmulatorDTO.Name.Trim();
+            String selectedEmulator = SelectorDomain.SelectorListDomain.Emulator.Name.Trim();
             String unformattedEmulator = NameFormatter.UnformatEmulatorName(selectedEmulator);
 
-            //Change emulator selected property to true in the database
             await SelectorDomain.SelectorModel.SelectEmulatorAsync(unformattedEmulator);
 
-            //Return the name and icon from the selected emulator
             var emulatorSelectedModel = await SelectorDomain.SelectorModel.SelectedEmulatorAsync(unformattedEmulator);
 
             //Log.Information($"SelectedEmulatorAsync(): {emulatorSelectedModel}");
 
             if (emulatorSelectedModel != null)
             {
-                //!: null-forgiving operator to ensure that OnEmulatorSelectedDTO is not null before invoking it. The value must be 100% not null
-                //Send the selected emulator to the event handler thus to the EmulatorListViewModel
-                //OnEmulatorSelectedDTO?.Invoke(this, emulatorSelectedModel!);
-
-                //Log.Information($"EmulatorSelectorViewModel instance hash: {GetHashCode()}");
-
-                //Log.Information($"emulatorSelectedModel on Invoke: {emulatorSelectedModel.Name} {emulatorSelectedModel.Icon}");
-
-                //WeakReferenceMessenger.Default.Send(new EmulatorSelectedMessage(emulatorSelectedModel));
-
-                //Log.Information($"emulatorSelectedModel on EmulatorSelectorViewModel: {emulatorSelectedModel.Name}");
 
                 WeakReferenceMessenger.Default.Send(new EmulatorSelectedMessage(emulatorSelectedModel));
-
-                Log.Information("Sender: hash = {hash}, Name = {Name}, IconLen = {len}", this.GetHashCode(), emulatorSelectedModel.Name, emulatorSelectedModel.Icon?.Length);
             }
         }
 
         private Boolean CanAddEmulator()
         {
-            if (SelectorDomain.EmulatorDTO.Name != "Select emulator")
+            if (SelectorDomain.SelectorListDomain.Emulator.Name != "Select emulator")
             {
                 return true;
             }
@@ -86,9 +70,9 @@ namespace ViewModels.EmulatorViewModels
 
         private void PropertyChangedName()
         {
-            SelectorDomain.EmulatorDTO.PropertyChanged += (s, e) =>
+            SelectorDomain.SelectorListDomain.Emulator.PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName == nameof(SelectorDomain.EmulatorDTO.Name))
+                if (e.PropertyName == nameof(SelectorDomain.SelectorListDomain.Emulator.Name))
                 {
                     AddEmulatorCommand.NotifyCanExecuteChanged();
                 }

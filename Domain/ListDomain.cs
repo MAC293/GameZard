@@ -1,51 +1,35 @@
-﻿using GameZard.DTO;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using GameZard.Context;
+using GameZard.DTO;
 using GameZard.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameZard.Domain
 {
-    public class ListDomain
+    public partial class ListDomain : ObservableObject
     {
-        private EmulatorDTO _EmulatorDTO;
-        private SelectorModel _SelectorModel;
+        private SelectorListDomain _SelectorListDomain;
 
         public ListDomain()
         {
-            EmulatorDTO = new EmulatorDTO();
-            SelectorModel = new SelectorModel();
+            SelectorListDomain = new SelectorListDomain();
         }
 
-        public EmulatorDTO EmulatorDTO
+        public SelectorListDomain SelectorListDomain
         {
-            get { return _EmulatorDTO; }
-            set { _EmulatorDTO = value; }
-        }
-
-        public SelectorModel SelectorModel
-        {
-            get { return _SelectorModel; }
-            set { _SelectorModel = value; }
+            get { return _SelectorListDomain; }
+            set { _SelectorListDomain = value; }
         }
 
         public void LoadEmulators()
         {
-            if (EmulatorDTO.SelectedEmulators != null)
-            {
-                if (EmulatorDTO != null)
-                {
-                    EmulatorDTO.SelectedEmulators.Add(EmulatorDTO);
-
-                    Log.Information("EmulatorDTO.SelectedEmulators.Add(EmulatorDTO): {EmulatorDTO Name}", EmulatorDTO.Name);
-                }
-
-            }
-            
-            
+            SelectorListDomain.SelectedEmulators.Add(SelectorListDomain.Emulator);
         }
     }
 }
