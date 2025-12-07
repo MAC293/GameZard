@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Media.Imaging;
 
 namespace GameZard.DTO
 {
@@ -15,7 +16,7 @@ namespace GameZard.DTO
         private String _Name;
 
         [ObservableProperty]
-        public Byte[]? _Icon;
+        private Bitmap _Icon;
 
         [ObservableProperty]
         private String _Console;

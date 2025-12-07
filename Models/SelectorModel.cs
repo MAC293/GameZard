@@ -29,23 +29,23 @@ namespace GameZard.Models
         }
 
         //Gets a collection of emulators with their icon-name
-        public ObservableCollection<EmulatorDTO> Emulators()
-        {
-            var emulatorsDAL = Context.Emulators.ToList();
+        //public ObservableCollection<EmulatorDTO> Emulators()
+        //{
+        //    var emulatorsDAL = Context.Emulators.ToList();
 
-            var emulatorsDTO = new ObservableCollection<EmulatorDTO>();
+        //    var emulatorsDTO = new ObservableCollection<EmulatorDTO>();
 
-            foreach (var emulator in emulatorsDAL)
-            {
-                emulatorsDTO.Add(new EmulatorDTO()
-                {
-                    Name = NameFormatter.FormatEmulatorName(emulator.Name.Trim()),
-                    Icon = emulator.Icon,
-                });
-            }
+        //    foreach (var emulator in emulatorsDAL)
+        //    {
+        //        emulatorsDTO.Add(new EmulatorDTO()
+        //        {
+        //            Name = NameFormatter.FormatEmulatorName(emulator.Name.Trim()),
+        //            Icon = ImageConverter.ToBitmap(emulator.Icon)
+        //        });
+        //    }
 
-            return emulatorsDTO;
-        }
+        //    return emulatorsDTO;
+        //}
 
         //Return a collection of emulators name
         public  ObservableCollection<String> EmulatorNames()
@@ -91,7 +91,8 @@ namespace GameZard.Models
                         var selectedEmulator = new EmulatorDTO()
                         {
                             Name = NameFormatter.FormatEmulatorName(emulator.Name),
-                            Icon = emulator.Icon
+                            //Icon = emulator.Icon
+                            Icon = ImageConverter.ToBitmap(emulator.Icon)
 
                         };
 
