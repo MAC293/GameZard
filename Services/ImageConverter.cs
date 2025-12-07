@@ -10,7 +10,7 @@ namespace GameZard.Services
 {
     public static class ImageConverter
     {
-        public static Bitmap? ToBitmap(Byte[]? blob)
+        public static Bitmap? BLOBToBitmap(Byte[]? blob)
         {
             if (blob == null || blob.Length == 0)
 

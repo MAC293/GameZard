@@ -92,7 +92,7 @@ namespace GameZard.Models
                         {
                             Name = NameFormatter.FormatEmulatorName(emulator.Name),
                             //Icon = emulator.Icon
-                            Icon = ImageConverter.ToBitmap(emulator.Icon)
+                            Icon = ImageConverter.BLOBToBitmap(emulator.Icon)
 
                         };
 
