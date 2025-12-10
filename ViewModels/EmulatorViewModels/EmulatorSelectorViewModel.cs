@@ -18,11 +18,19 @@ namespace ViewModels.EmulatorViewModels
     public partial class EmulatorSelectorViewModel
     {
         private SelectorDomain _SelectorDomain;
+        private SelectorListDomain _SelectorListDomain;
 
         public EmulatorSelectorViewModel()
         {
             SelectorDomain = new SelectorDomain();
+            SelectorListDomain = new SelectorListDomain();
             PropertyChangedName();
+        }
+
+        public SelectorListDomain SelectorListDomain
+        {
+            get { return _SelectorListDomain; }
+            set { _SelectorListDomain = value; }
         }
 
         public SelectorDomain SelectorDomain
@@ -62,10 +70,33 @@ namespace ViewModels.EmulatorViewModels
         {
             if (SelectorDomain.SelectorListDomain.Emulator.Name != "Select emulator")
             {
-                return true;
+                //return true;
+                if (IsEmulatorRepeated())
+                {
+                    return true;
+                }
             }
 
             return false;
+        }
+
+        private Boolean IsEmulatorRepeated()
+        {
+            if (SelectorListDomain.SelectedEmulators.Count > 0)
+            {
+                foreach (var emulator in SelectorListDomain.SelectedEmulators)
+                {
+                    foreach (var selectedEmulator in SelectorListDomain.Emulators)
+                    {
+                        if (emulator.Name == selectedEmulator)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
 
         private void PropertyChangedName()
