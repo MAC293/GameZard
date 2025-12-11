@@ -71,7 +71,7 @@ namespace ViewModels.EmulatorViewModels
             if (SelectorDomain.SelectorListDomain.Emulator.Name != "Select emulator")
             {
                 //return true;
-                if (IsEmulatorRepeated())
+                if (IsAvailable())
                 {
                     return true;
                 }
@@ -80,9 +80,16 @@ namespace ViewModels.EmulatorViewModels
             return false;
         }
 
-        private Boolean IsEmulatorRepeated()
+        private Boolean IsAvailable()
         {
-            if (SelectorListDomain.SelectedEmulators.Count > 0)
+            //Log.Information($"SelectorListDomain.SelectedEmulators.Count: {SelectorListDomain.SelectedEmulators.Count}");
+
+            if (SelectorListDomain.SelectedEmulators.Count == 0)
+            {
+                return true;
+            }
+            
+            if (SelectorListDomain.SelectedEmulators.Count >= 1)
             {
                 foreach (var emulator in SelectorListDomain.SelectedEmulators)
                 {
