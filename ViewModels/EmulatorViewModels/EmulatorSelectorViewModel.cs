@@ -78,6 +78,7 @@ namespace ViewModels.EmulatorViewModels
                 {
                     return true;
                 }
+
             }
 
             return false;
