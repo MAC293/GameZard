@@ -23,7 +23,8 @@ namespace ViewModels.EmulatorViewModels
         public EmulatorSelectorViewModel()
         {
             SelectorDomain = new SelectorDomain();
-            SelectorListDomain = new SelectorListDomain();
+            //Use the same SelectorListDomain instance that SelectorDomain provides
+            //SelectorListDomain = new SelectorListDomain();
             PropertyChangedName();
         }
 
@@ -47,6 +48,7 @@ namespace ViewModels.EmulatorViewModels
 
         }
 
+        //Execute
         [RelayCommand(CanExecute = nameof(CanAddEmulator))]
         public async Task AddEmulator()
         {
@@ -66,6 +68,7 @@ namespace ViewModels.EmulatorViewModels
             }
         }
 
+        //CanExecute
         private Boolean CanAddEmulator()
         {
             if (SelectorDomain.SelectorListDomain.Emulator.Name != "Select emulator")
@@ -84,18 +87,18 @@ namespace ViewModels.EmulatorViewModels
         {
             //Log.Information($"SelectorListDomain.SelectedEmulators.Count: {SelectorListDomain.SelectedEmulators.Count}");
 
-            if (SelectorListDomain.SelectedEmulators.Count == 0)
+            if (SelectorDomain.SelectorListDomain.SelectedEmulators.Count == 0)
             {
                 return true;
             }
             
-            if (SelectorListDomain.SelectedEmulators.Count >= 1)
+            if (SelectorDomain.SelectorListDomain.SelectedEmulators.Count >= 1)
             {
-                foreach (var emulator in SelectorListDomain.SelectedEmulators)
+                foreach (var emulator in SelectorDomain.SelectorListDomain.SelectedEmulators)
                 {
-                    foreach (var selectedEmulator in SelectorListDomain.Emulators)
+                    foreach (var selectedEmulator in SelectorDomain.SelectorListDomain.Emulators)
                     {
-                        if (emulator.Name == selectedEmulator)
+                        if (emulator.Name.Trim() == selectedEmulator.Trim())
                         {
                             return false;
                         }
