@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GameZard.Domain
 {
-    public partial class SelectorListDomain : ObservableObject
+    public partial class EmulatorDomain : ObservableObject
     {
         private EmulatorDTO _Emulator;
 
@@ -20,7 +20,7 @@ namespace GameZard.Domain
         [ObservableProperty]
         private ObservableCollection<EmulatorDTO> _SelectedEmulators;
 
-        public SelectorListDomain()
+        public EmulatorDomain()
         {
             Emulator = new EmulatorDTO();
             Emulators = new ObservableCollection<String>();

@@ -25,7 +25,7 @@ namespace ViewModels.EmulatorViewModels
             {
                 if (message.Emulator != null)
                 {
-                    ELVM.ListDomain.SelectorListDomain.Emulator = message.Emulator;
+                    ELVM.ListDomain.EmulatorDomain.Emulator = message.Emulator;
                     ELVM.ListDomain.LoadEmulators();
                 }
             });

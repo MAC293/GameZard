@@ -14,22 +14,22 @@ namespace GameZard.Domain
 {
     public partial class ListDomain : ObservableObject
     {
-        private SelectorListDomain _SelectorListDomain;
+        private EmulatorDomain _EmulatorDomain;
 
         public ListDomain()
         {
-            SelectorListDomain = new SelectorListDomain();
+            EmulatorDomain = new EmulatorDomain();
         }
 
-        public SelectorListDomain SelectorListDomain
+        public EmulatorDomain EmulatorDomain
         {
-            get { return _SelectorListDomain; }
-            set { _SelectorListDomain = value; }
+            get { return _EmulatorDomain; }
+            set { _EmulatorDomain = value; }
         }
 
         public void LoadEmulators()
         {
-            SelectorListDomain.SelectedEmulators.Add(SelectorListDomain.Emulator);
+            EmulatorDomain.SelectedEmulators.Add(EmulatorDomain.Emulator);
         }
     }
 }

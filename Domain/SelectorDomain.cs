@@ -10,19 +10,19 @@ namespace GameZard.Domain
 {
     public class SelectorDomain
     {
-        private SelectorListDomain _SelectorListDomain;
+        private EmulatorDomain _EmulatorDomain;
         private SelectorModel _SelectorModel;
 
         public SelectorDomain()
         {
-            SelectorListDomain = new SelectorListDomain();
+            EmulatorDomain = new EmulatorDomain();
             SelectorModel = new SelectorModel();
         }
 
-        public SelectorListDomain SelectorListDomain
+        public EmulatorDomain EmulatorDomain
         {
-            get { return _SelectorListDomain; }
-            set { _SelectorListDomain = value; }
+            get { return _EmulatorDomain; }
+            set { _EmulatorDomain = value; }
         }
 
         public SelectorModel SelectorModel
@@ -33,21 +33,21 @@ namespace GameZard.Domain
 
         public void LoadEmulators()
         {
-            SelectorListDomain.Emulators = SelectorModel.EmulatorNames();
+            EmulatorDomain.Emulators = SelectorModel.EmulatorNames();
         }
 
         public void EmulatorsPlaceholder()
         {
-            var emulators = SelectorListDomain.Emulators;
+            var emulators = EmulatorDomain.Emulators;
 
             if (!emulators.Contains("Select emulator"))
             {
                 emulators.Insert(0, "Select emulator");
             }
 
-            SelectorListDomain.Emulator.Name = "Select emulator";
+            EmulatorDomain.Emulator.Name = "Select emulator";
 
-            SelectorListDomain.Emulators = emulators;
+            EmulatorDomain.Emulators = emulators;
         }
     }
 }

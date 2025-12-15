@@ -18,21 +18,21 @@ namespace ViewModels.EmulatorViewModels
     public partial class EmulatorSelectorViewModel
     {
         private SelectorDomain _SelectorDomain;
-        private SelectorListDomain _SelectorListDomain;
+        //private EmulatorDomain _EmulatorDomain;
 
         public EmulatorSelectorViewModel()
         {
             SelectorDomain = new SelectorDomain();
-            //Use the same SelectorListDomain instance that SelectorDomain provides
-            //SelectorListDomain = new SelectorListDomain();
+            //Use the same EmulatorDomain instance that SelectorDomain provides
+            //EmulatorDomain = new EmulatorDomain();
             PropertyChangedName();
         }
 
-        public SelectorListDomain SelectorListDomain
-        {
-            get { return _SelectorListDomain; }
-            set { _SelectorListDomain = value; }
-        }
+        //public EmulatorDomain EmulatorDomain
+        //{
+        //    get { return _EmulatorDomain; }
+        //    set { _EmulatorDomain = value; }
+        //}
 
         public SelectorDomain SelectorDomain
         {
@@ -42,7 +42,7 @@ namespace ViewModels.EmulatorViewModels
 
         public ObservableCollection<String> FormattedEmulators()
         {
-            var emulators = SelectorDomain.SelectorListDomain.Emulators;
+            var emulators = SelectorDomain.EmulatorDomain.Emulators;
 
             return NameFormatter.FormatEmulatorNames(emulators);
 
@@ -52,7 +52,7 @@ namespace ViewModels.EmulatorViewModels
         [RelayCommand(CanExecute = nameof(CanAddEmulator))]
         public async Task AddEmulator()
         {
-            String selectedEmulator = SelectorDomain.SelectorListDomain.Emulator.Name.Trim();
+            String selectedEmulator = SelectorDomain.EmulatorDomain.Emulator.Name.Trim();
             String unformattedEmulator = NameFormatter.UnformatEmulatorName(selectedEmulator);
 
             await SelectorDomain.SelectorModel.SelectEmulatorAsync(unformattedEmulator);
@@ -71,7 +71,7 @@ namespace ViewModels.EmulatorViewModels
         //CanExecute
         private Boolean CanAddEmulator()
         {
-            if (SelectorDomain.SelectorListDomain.Emulator.Name != "Select emulator")
+            if (SelectorDomain.EmulatorDomain.Emulator.Name != "Select emulator")
             {
                 //return true;
                 if (IsAvailable())
@@ -86,18 +86,18 @@ namespace ViewModels.EmulatorViewModels
 
         private Boolean IsAvailable()
         {
-            //Log.Information($"SelectorListDomain.SelectedEmulators.Count: {SelectorListDomain.SelectedEmulators.Count}");
+            //Log.Information($"EmulatorDomain.SelectedEmulators.Count: {EmulatorDomain.SelectedEmulators.Count}");
 
-            if (SelectorDomain.SelectorListDomain.SelectedEmulators.Count == 0)
+            if (SelectorDomain.EmulatorDomain.SelectedEmulators.Count == 0)
             {
                 return true;
             }
             
-            if (SelectorDomain.SelectorListDomain.SelectedEmulators.Count >= 1)
+            if (SelectorDomain.EmulatorDomain.SelectedEmulators.Count >= 1)
             {
-                foreach (var emulator in SelectorDomain.SelectorListDomain.SelectedEmulators)
+                foreach (var emulator in SelectorDomain.EmulatorDomain.SelectedEmulators)
                 {
-                    foreach (var selectedEmulator in SelectorDomain.SelectorListDomain.Emulators)
+                    foreach (var selectedEmulator in SelectorDomain.EmulatorDomain.Emulators)
                     {
                         if (emulator.Name.Trim() == selectedEmulator.Trim())
                         {
@@ -112,9 +112,9 @@ namespace ViewModels.EmulatorViewModels
 
         private void PropertyChangedName()
         {
-            SelectorDomain.SelectorListDomain.Emulator.PropertyChanged += (s, e) =>
+            SelectorDomain.EmulatorDomain.Emulator.PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName == nameof(SelectorDomain.SelectorListDomain.Emulator.Name))
+                if (e.PropertyName == nameof(SelectorDomain.EmulatorDomain.Emulator.Name))
                 {
                     AddEmulatorCommand.NotifyCanExecuteChanged();
                 }

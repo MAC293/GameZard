@@ -10,7 +10,7 @@
 	<Border BorderBrush="Black" BorderThickness="0,0,1,0" Background="White">
 		<ScrollViewer VerticalScrollBarVisibility="Auto">
 			<ListBox Name="EmulatorList"
-					 ItemsSource="{Binding ELVM.ListDomain.SelectorListDomain.SelectedEmulators}"
+					 ItemsSource="{Binding ELVM.ListDomain.EmulatorDomain.SelectedEmulators}"
 					 Margin="0,0,0,0"
 					 SelectedIndex="3">
 
