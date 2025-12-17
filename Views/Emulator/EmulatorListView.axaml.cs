@@ -15,6 +15,7 @@ public partial class EmulatorListView : UserControl
     {
         InitializeComponent();
         EmulatorViewModel = new EmulatorViewModel();
+        LoadListSelected();
         DataContext = EmulatorViewModel;
     }
 
@@ -22,5 +23,10 @@ public partial class EmulatorListView : UserControl
     {
         get { return _EmulatorViewModel; }
         set { _EmulatorViewModel = value; }
+    }
+
+    public void LoadListSelected()
+    {
+        EmulatorViewModel.ELVM.ListDomain.LoadEmulatorsAtStart();
     }
 }

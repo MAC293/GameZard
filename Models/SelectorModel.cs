@@ -48,7 +48,7 @@ namespace GameZard.Models
         //}
 
         //Return a collection of emulators name
-        public  ObservableCollection<String> EmulatorNames()
+        public ObservableCollection<String> EmulatorNames()
         {
             return new ObservableCollection<String>(Context.Emulators.Select(e => e.Name.Trim()));
         }

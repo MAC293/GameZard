@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace GameZard.Domain
 {
+    //Exposes EmulatorDTO, combobox list of emulators, and selected emulators collection
     public partial class EmulatorDomain : ObservableObject
     {
+
         private EmulatorDTO _Emulator;
 
         [ObservableProperty]

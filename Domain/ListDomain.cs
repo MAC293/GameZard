@@ -15,10 +15,12 @@ namespace GameZard.Domain
     public partial class ListDomain : ObservableObject
     {
         private EmulatorDomain _EmulatorDomain;
+        private ListModel _ListModel;
 
         public ListDomain()
         {
             EmulatorDomain = new EmulatorDomain();
+            ListModel = new ListModel();
         }
 
         public EmulatorDomain EmulatorDomain
@@ -27,9 +29,20 @@ namespace GameZard.Domain
             set { _EmulatorDomain = value; }
         }
 
+        public ListModel ListModel
+        {
+            get { return _ListModel; }
+            set { _ListModel = value; }
+        }
+
         public void LoadEmulators()
         {
             EmulatorDomain.SelectedEmulators.Add(EmulatorDomain.Emulator);
+        }
+
+        public void LoadEmulatorsAtStart()
+        {
+            EmulatorDomain.SelectedEmulators = ListModel.LoadListAtStart();
         }
     }
 }
