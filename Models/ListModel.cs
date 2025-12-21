@@ -42,6 +42,13 @@ namespace GameZard.Models
             return new ObservableCollection<EmulatorDTO>(emulators);
         }
 
+        public async Task UncheckEmulatorAsync(String name)
+        {
+            var emulator = await Context.Emulators.FirstOrDefaultAsync(emulator => emulator.Name.Trim() == name.Trim());
 
+            emulator.IsSelected = false;
+
+            await Context.SaveChangesAsync();
+        }
     }
 }
