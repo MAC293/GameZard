@@ -22,7 +22,7 @@
                             <TextBlock Text="{Binding Name}" Margin="8,0"/>
 
                             
-                            <!--CommandParameter="{Binding}" Command="{Binding RemoveEmulatorCommand}"--> 
+                            <!--CommandParameter="{Binding}" Command="{Binding RemoveEmulatorCommand}"-->
                             <Button Foreground="red" Content="-" Width="25" Height="25" Margin="8,-15,0,0"/>
                         </StackPanel>
                     </DataTemplate>
