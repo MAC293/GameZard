@@ -10,13 +10,17 @@ namespace GameZard.Views;
 public partial class EmulatorListView : UserControl
 {
     private EmulatorViewModel _EmulatorViewModel;
+    private EmulatorListViewModel _EmulatorListViewModel;
 
     public EmulatorListView()
     {
         InitializeComponent();
-        EmulatorViewModel = new EmulatorViewModel();
+        //EmulatorViewModel = new EmulatorViewModel();
+        EmulatorListViewModel = new EmulatorListViewModel();
         LoadListSelected();
-        DataContext = EmulatorViewModel;
+        //DataContext = EmulatorViewModel;
+        DataContext = EmulatorListViewModel;
+
     }
 
     public EmulatorViewModel EmulatorViewModel
@@ -25,8 +29,14 @@ public partial class EmulatorListView : UserControl
         set { _EmulatorViewModel = value; }
     }
 
+    public EmulatorListViewModel EmulatorListViewModel
+    {
+        get { return _EmulatorListViewModel; }
+        set { _EmulatorListViewModel = value; }
+    }
+
     public void LoadListSelected()
     {
-        EmulatorViewModel.ELVM.ListDomain.LoadEmulatorsAtStart();
+        EmulatorListViewModel.ListDomain.LoadEmulatorsAtStart();
     }
 }

@@ -3,14 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:emulatorViewModels="clr-namespace:ViewModels.EmulatorViewModels"
+             xmlns:emulatorViewModels1="clr-namespace:GameZard.ViewModels.EmulatorViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GameZard.Views.EmulatorListView"
-             x:DataType="emulatorViewModels:EmulatorViewModel">
+             x:DataType="emulatorViewModels1:EmulatorListViewModel">
 
     <Border BorderBrush="Black" BorderThickness="0,0,1,0" Background="White">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <ListBox Name="EmulatorList"
-                     ItemsSource="{Binding ELVM.ListDomain.EmulatorDomain.SelectedEmulators}"
+                     ItemsSource="{Binding ListDomain.EmulatorDomain.SelectedEmulators}"
                      Margin="0,0,0,0"
                      SelectedIndex="3">
 

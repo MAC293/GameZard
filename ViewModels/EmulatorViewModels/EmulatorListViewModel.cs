@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using GameZard.Domain;
 using GameZard.DTO;
+using GameZard.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,15 @@ namespace GameZard.ViewModels.EmulatorViewModels
         public EmulatorListViewModel()
         {
             ListDomain = new ListDomain();
+
+            WeakReferenceMessenger.Default.Register<EmulatorSelectedMessage>(this, (recipient, message) =>
+            {
+                if (message.Emulator != null)
+                {
+                    ListDomain.EmulatorDomain.Emulator = message.Emulator;
+                    ListDomain.LoadEmulators();
+                }
+            });
         }
 
         public ListDomain ListDomain
