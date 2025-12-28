@@ -2,8 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:emulatorViewModels="clr-namespace:ViewModels.EmulatorViewModels"
              xmlns:emulatorViewModels1="clr-namespace:GameZard.ViewModels.EmulatorViewModels"
+             xmlns:dto="clr-namespace:GameZard.DTO"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GameZard.Views.EmulatorListView"
              x:DataType="emulatorViewModels1:EmulatorListViewModel">
@@ -16,17 +16,25 @@
                      SelectedIndex="3">
 
                 <ListBox.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="dto:EmulatorDTO">
                         <StackPanel Orientation="Horizontal">
 
                             <Image Source="{Binding Icon}" Width="32" Height="32"/>
                             <TextBlock Text="{Binding Name}" Margin="8,0"/>
-                            
-                            <!--CommandParameter="{Binding}" Command="{Binding RemoveEmulatorCommand}"-->
-                            <Button Foreground="red" Content="-" Width="25" Height="25" Margin="8,-15,0,0"/>
+
+                            <Button
+                                Content="-"
+                                Foreground="red"
+                                Width="25"
+                                Height="25"
+                                Margin="8,-15,0,0"
+                                Command="{Binding $parent[ListBox].DataContext.RemoveEmulatorCommand}"
+                                CommandParameter="{Binding}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+
+
             </ListBox>
         </ScrollViewer>
     </Border>

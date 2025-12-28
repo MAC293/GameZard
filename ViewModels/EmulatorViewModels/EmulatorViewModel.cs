@@ -19,16 +19,7 @@ namespace ViewModels.EmulatorViewModels
 
         public EmulatorViewModel()
         {
-            //ELVM = new EmulatorListViewModel();
 
-            //WeakReferenceMessenger.Default.Register<EmulatorSelectedMessage>(this, (recipient, message) =>
-            //{
-            //    if (message.Emulator != null)
-            //    {
-            //        ELVM.ListDomain.EmulatorDomain.Emulator = message.Emulator;
-            //        ELVM.ListDomain.LoadEmulators();
-            //    }
-            //});
         }
 
         public EmulatorListViewModel ELVM
