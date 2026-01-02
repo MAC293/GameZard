@@ -9,6 +9,7 @@ namespace GameZard.Services
 {
     public static class NameFormatter
     {
+        #region Selector-List formatters
         //Remove underscores from emulators name, and format specific names (Dolphin's)
         public static ObservableCollection<String> FormatEmulatorNames(ObservableCollection<String> emulators)
         {
@@ -78,6 +79,33 @@ namespace GameZard.Services
 
             return nintendoFormatted;
         }
+        #endregion
+
+        #region List-Main formatters
+        //Add 'Save_' to current working emulator's ID, and format Dolphin's name   
+        public static String UnformatCurrentEmulatorID(String currentEmulatorName)
+        {
+            String nintendoFormatted = String.Empty;
+
+            if (currentEmulatorName.Trim() == "Dolphin (Wii)")
+            {
+                nintendoFormatted = "Save_Dolphin_Wii";
+            }
+            else if (currentEmulatorName.Trim() == "Dolphin (GameCube)")
+            {
+                nintendoFormatted = "Save_Dolphin_GameCube";
+            }
+            else if (currentEmulatorName.Trim() != "Dolphin (Wii)" || currentEmulatorName != "Dolphin (GameCube)")
+            {
+                String otherFormatted = "Save_" + currentEmulatorName.Replace(" ", "_").Trim();
+
+                return otherFormatted;
+            }
+
+            return nintendoFormatted;
+        }
+        #endregion
 
     }
+
 }
