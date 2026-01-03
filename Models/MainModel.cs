@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameZard.DTO;
+using GameZard.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameZard.Models
@@ -27,26 +28,21 @@ namespace GameZard.Models
         //Returns the current selected emulator
         public async Task<EmulatorSavedataDTO> CurrentEmulatorAsync(String selectedEmulator)
         {
+
+            //selectedEmulator comes as Save_PPSSPP converted from PPSSPP
             var currentEmulator = await Context.EmulatorSavedata.FirstOrDefaultAsync(emulator => emulator.Id.Trim() == selectedEmulator);
 
             if (currentEmulator != null)
             {
                 return new EmulatorSavedataDTO
                 {
-                    Id = currentEmulator.Id,
-                    BackupMode = currentEmulator.BackupMode,
+                    ID = NameFormatter.FormatCurrentEmulatorName(currentEmulator.Id),
+                    Icon =  ImageConverter.BLOBToBitmap(await EmulatorIconAsync(NameFormatter.SimpleFormatCurrentEmulatorName(currentEmulator.Id))),
+                    BackUpMode = currentEmulator.BackupMode,
                     FromPath = currentEmulator.FromPath,
                     ToPath = currentEmulator.ToPath,
                     LastSave = currentEmulator.LastSave,
                     Emulator = currentEmulator.Emulator
-                    //ID
-                    //Icon
-                    //SelectedEmulator
-                    //BackUpMode
-                    //FromPath
-                    //ToPath
-                    //LastSave
-                    //Emulator
                 };
             }
             else
@@ -56,7 +52,7 @@ namespace GameZard.Models
         }
 
         //Return the icon of the selected emulator
-        public async Task<Byte[]> GetEmulatorIconAsync(String selectedEmulator)
+        public async Task<Byte[]> EmulatorIconAsync(String selectedEmulator)
         {
             var emulator = await Context.Emulators.FirstOrDefaultAsync(emulator => emulator.Name.Trim() == selectedEmulator.Trim());
 

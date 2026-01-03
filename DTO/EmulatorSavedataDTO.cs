@@ -16,11 +16,11 @@ namespace GameZard.DTO
         [ObservableProperty]
         private Bitmap _Icon;
 
-        [ObservableProperty]
-        private String _SelectedEmulator;
+        //[ObservableProperty]
+        //private String _SelectedEmulator;
 
         [ObservableProperty]
-        private Bitmap _BackUpMode;
+        private String _BackUpMode;
 
         [ObservableProperty]
         private String _FromPath;

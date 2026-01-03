@@ -104,6 +104,37 @@ namespace GameZard.Services
 
             return nintendoFormatted;
         }
+
+        //Remove 'Save_' from current working emulator's ID, and format Dolphin's name
+        public static String FormatCurrentEmulatorName(String currentEmulatorID)
+        {
+            String nintendoFormatted = String.Empty;
+
+            if (currentEmulatorID.Trim() == "Save_Dolphin_Wii")
+            {
+                nintendoFormatted = "Dolphin (Wii)";
+            }
+            else if (currentEmulatorID.Trim() == "Save_Dolphin_GameCube")
+            {
+                nintendoFormatted = "Dolphin (GameCube)";
+            }
+            else if (currentEmulatorID.Trim() != "Save_Dolphin_Wii" || currentEmulatorID != "Save_Dolphin_GameCube")
+            {
+                String otherFormatted = currentEmulatorID.Replace("Save_", "").Replace("_", " ").Trim();
+
+                return otherFormatted;
+            }
+
+            return nintendoFormatted;
+        }
+
+        //Remove Save_ from current working emulator's ID
+        public static String SimpleFormatCurrentEmulatorName(String currentEmulatorID)
+        {
+            String formattedName = currentEmulatorID.Replace("Save_", "").Trim();
+
+            return formattedName;
+        }
         #endregion
 
     }
