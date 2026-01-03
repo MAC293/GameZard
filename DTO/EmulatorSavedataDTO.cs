@@ -31,8 +31,8 @@ namespace GameZard.DTO
         [ObservableProperty]
         private String _LastSave;
 
-        [ObservableProperty]
-        private String _Emulator;
+        //[ObservableProperty]
+        //private String _Emulator;
 
     }
 }

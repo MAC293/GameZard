@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameZard.Domain
 {
-    internal class MainDomain
+    public class MainDomain
     {
     }
 }

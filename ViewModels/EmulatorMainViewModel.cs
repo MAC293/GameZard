@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GameZard.ViewModels
 {
-    internal class EmulatorMainViewModel
+    public class EmulatorMainViewModel
     {
+
     }
 }

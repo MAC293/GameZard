@@ -41,14 +41,11 @@ namespace GameZard.Models
                     BackUpMode = currentEmulator.BackupMode,
                     FromPath = currentEmulator.FromPath,
                     ToPath = currentEmulator.ToPath,
-                    LastSave = currentEmulator.LastSave,
-                    Emulator = currentEmulator.Emulator
+                    LastSave = currentEmulator.LastSave
                 };
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         //Return the icon of the selected emulator
