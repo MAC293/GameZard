@@ -8,5 +8,6 @@ namespace GameZard.Domain
 {
     public class MainDomain
     {
+
     }
 }
