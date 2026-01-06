@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModels.EmulatorViewModels;
+using Serilog;
 
 namespace GameZard.ViewModels.EmulatorViewModels
 {
@@ -36,6 +37,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
             set { _ListDomain = value; }
         }
 
+        //Log.Information($"SelectedEmulatorAsync(): {emulatorSelectedModel}");
         [RelayCommand]
         public async Task RemoveEmulator(EmulatorDTO dto)
         {
