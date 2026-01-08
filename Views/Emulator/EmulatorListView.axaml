@@ -4,24 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:emulatorViewModels1="clr-namespace:GameZard.ViewModels.EmulatorViewModels"
              xmlns:dto="clr-namespace:GameZard.DTO"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             mc:Ignorable="d"
              x:Class="GameZard.Views.EmulatorListView"
              x:DataType="emulatorViewModels1:EmulatorListViewModel">
 
     <Border BorderBrush="Black" BorderThickness="0,0,1,0" Background="White">
+
         <ScrollViewer VerticalScrollBarVisibility="Auto">
+
             <ListBox Name="EmulatorList"
                      ItemsSource="{Binding ListDomain.EmulatorDomain.SelectedEmulators}"
-                     Margin="0,0,0,0"
-                     SelectedIndex="3">
+                     Margin="0">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate x:DataType="dto:EmulatorDTO">
+
+                        <!-- Banner container -->
                         <StackPanel Orientation="Horizontal">
 
-                            <Image Source="{Binding Icon}" Width="32" Height="32"/>
-                            <TextBlock Text="{Binding Name}" Margin="8,0"/>
+                            <!-- Clickable banner area -->
+                            <StackPanel Orientation="Horizontal">
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="PointerReleased">
+                                        <ia:InvokeCommandAction
+                                            Command="{Binding $parent[ListBox].DataContext.SelectedEmulatorCommand}"
+                                            CommandParameter="{Binding}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
 
+                                <Image Source="{Binding Icon}" Width="32" Height="32"/>
+                                <TextBlock Text="{Binding Name}" Margin="8,0"/>
+                            </StackPanel>
+
+                            <!-- Remove button (unchanged) -->
                             <Button
                                 Content="-"
                                 Foreground="red"
@@ -30,12 +47,15 @@
                                 Margin="8,-15,0,0"
                                 Command="{Binding $parent[ListBox].DataContext.RemoveEmulatorCommand}"
                                 CommandParameter="{Binding}" />
+
                         </StackPanel>
+
                     </DataTemplate>
                 </ListBox.ItemTemplate>
 
             </ListBox>
-        </ScrollViewer>
-    </Border>
 
+        </ScrollViewer>
+
+    </Border>
 </UserControl>
