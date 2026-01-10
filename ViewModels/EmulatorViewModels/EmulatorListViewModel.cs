@@ -58,11 +58,11 @@ namespace GameZard.ViewModels.EmulatorViewModels
         }
 
         [RelayCommand]
-        public void SelectedEmulator(EmulatorDTO value)
+        public void SelectedEmulator(EmulatorDTO? value)
         {
             if (value is null) return;
 
-            Log.Information($"EmulatorSavedataDTO: {value.Name}");
+            Log.Information($"Selected emulator: {value.Name}");
         }
     }
 }
