@@ -60,7 +60,10 @@ namespace GameZard.ViewModels.EmulatorViewModels
         [RelayCommand]
         public void SelectedEmulator(EmulatorDTO? value)
         {
-            if (value is null) return;
+            if (value is null)
+
+                //Only exits the method early if value is null
+                return;
 
             Log.Information($"Selected emulator: {value.Name}");
         }

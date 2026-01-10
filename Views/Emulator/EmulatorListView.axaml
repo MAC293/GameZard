@@ -1,4 +1,4 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,18 +14,23 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-            <ListBox Name="EmulatorList"
-                     ItemsSource="{Binding ListDomain.EmulatorDomain.SelectedEmulators}"
-                     Margin="0">
+            <ListBox ItemsSource="{Binding ListDomain.EmulatorDomain.SelectedEmulators}"
+                     SelectedItem="{Binding ListDomain.EmulatorDomain.Emulator, Mode=TwoWay}">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate x:DataType="dto:EmulatorDTO">
+                        <Grid
+                            ColumnDefinitions="Auto,*,Auto"
+                            VerticalAlignment="Center"
+                            Height="48"
+                            Margin="6,2">
 
-                        <!-- Banner container -->
-                        <StackPanel Orientation="Horizontal">
+                            <!-- Clickable banner area (icon + name) -->
+                            <StackPanel
+                                Grid.Column="0"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
 
-                            <!-- Clickable banner area -->
-                            <StackPanel Orientation="Horizontal">
                                 <i:Interaction.Behaviors>
                                     <ia:EventTriggerBehavior EventName="PointerReleased">
                                         <ia:InvokeCommandAction
@@ -34,25 +39,36 @@
                                     </ia:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
 
-                                <Image Source="{Binding Icon}" Width="32" Height="32"/>
-                                <TextBlock Text="{Binding Name}" Margin="8,0"/>
+                                <Image
+                                    Source="{Binding Icon}"
+                                    Width="32"
+                                    Height="32"
+                                    VerticalAlignment="Center"/>
+
+                                <TextBlock
+                                    Text="{Binding Name}"
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"/>
                             </StackPanel>
 
-                            <!-- Remove button (unchanged) -->
+                            <!-- Spacer column -->
+                            <Border Grid.Column="1"/>
+
+                            <!-- Remove button -->
                             <Button
+                                Grid.Column="2"
                                 Content="-"
-                                Foreground="red"
-                                Width="25"
-                                Height="25"
-                                Margin="8,-15,0,0"
+                                Width="26"
+                                Height="26"
+                                CornerRadius="6"
+                                Background="#D3D3D3"
+                                Foreground="Red"
+                                VerticalAlignment="Center"
                                 Command="{Binding $parent[ListBox].DataContext.RemoveEmulatorCommand}"
                                 CommandParameter="{Binding}" />
-
-                        </StackPanel>
-
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-
             </ListBox>
 
         </ScrollViewer>
