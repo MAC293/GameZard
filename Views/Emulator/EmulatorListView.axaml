@@ -15,7 +15,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
             <ListBox ItemsSource="{Binding ListDomain.EmulatorDomain.SelectedEmulators}"
-                     SelectedItem="{Binding ListDomain.EmulatorDomain.Emulator, Mode=TwoWay}">
+                     SelectedItem="{Binding ListDomain.EmulatorDomain.Emulator}">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate x:DataType="dto:EmulatorDTO">
@@ -39,16 +39,9 @@
                                     </ia:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
 
-                                <Image
-                                    Source="{Binding Icon}"
-                                    Width="32"
-                                    Height="32"
-                                    VerticalAlignment="Center"/>
+                                <Image Source="{Binding Icon}" Width="32" Height="32" VerticalAlignment="Center"/>
 
-                                <TextBlock
-                                    Text="{Binding Name}"
-                                    Margin="10,0,0,0"
-                                    VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Name}" Margin="10,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
 
                             <!-- Spacer column -->
