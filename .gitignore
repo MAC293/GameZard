@@ -363,4 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Database
-GameZard.db
+Database/GameZard.db
