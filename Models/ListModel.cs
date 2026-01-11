@@ -34,7 +34,7 @@ namespace GameZard.Models
                 .Where(e => e.IsSelected == true)
                 .Select(e => new EmulatorDTO
                 {
-                    Name = e.Name,
+                    Name = NameFormatter.FormatEmulatorName(e.Name),
                     Icon = ImageConverter.BLOBToBitmap(e.Icon)
                 })
                 .ToList();

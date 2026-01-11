@@ -2,6 +2,7 @@
 using GameZard.Context;
 using GameZard.DTO;
 using GameZard.Models;
+using GameZard.Services;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace GameZard.Domain
             set { _ListModel = value; }
         }
 
-        public void LoadEmulators()
+        public void LoadEmulator()
         {
             EmulatorDomain.SelectedEmulators.Add(EmulatorDomain.Emulator);
         }
@@ -43,6 +44,7 @@ namespace GameZard.Domain
         public void LoadEmulatorsAtStart()
         {
             EmulatorDomain.SelectedEmulators = ListModel.LoadListAtStart();
+
         }
     }
 }

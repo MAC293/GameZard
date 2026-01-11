@@ -28,7 +28,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
                 if (message.Emulator != null)
                 {
                     ListDomain.EmulatorDomain.Emulator = message.Emulator;
-                    ListDomain.LoadEmulators();
+                    ListDomain.LoadEmulator();
                 }
             });
         }

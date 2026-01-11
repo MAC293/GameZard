@@ -20,7 +20,6 @@ public partial class EmulatorListView : UserControl
         LoadListSelected();
         //DataContext = EmulatorViewModel;
         DataContext = EmulatorListViewModel;
-
     }
 
     public EmulatorViewModel EmulatorViewModel

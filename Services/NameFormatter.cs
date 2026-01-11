@@ -57,7 +57,7 @@ namespace GameZard.Services
             return nintendoFormatted;
         }
 
-        //Remove underscores from emulator name, and format specific name (Dolphin's)
+        //Remove underscores from emulator's name, and format specific name (Dolphin's)
         public static String FormatEmulatorName(String selectedEmulator)
         {
             String nintendoFormatted = String.Empty;
