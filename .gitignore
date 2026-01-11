@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # Database files
 # *.db
+GameZard.db-journal
