@@ -12,5 +12,7 @@ namespace GameZard.Services
 {
     public record EmulatorSelectedMessage(EmulatorDTO Emulator);
 
+    public record EmulatorMainMessage(String SelectedEmulator); 
+
 
 }

@@ -10,6 +10,9 @@ namespace GameZard
 {
     public partial class App : Application
     {
+        //Implement DI Container later instead of static property
+        //public static EmulatorMainViewModel MainViewModel { get; } = new();
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);

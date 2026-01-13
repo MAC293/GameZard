@@ -58,14 +58,16 @@ namespace GameZard.ViewModels.EmulatorViewModels
         }
 
         [RelayCommand]
-        public void SelectedEmulator(EmulatorDTO? value)
+        public void SelectedEmulator(EmulatorDTO? dto)
         {
-            if (value is null)
-
-                //Only exits the method early if value is null
+            if (dto is null)
+            {
                 return;
+            }
 
-            Log.Information($"Selected emulator: {value.Name}");
+            WeakReferenceMessenger.Default.Send(new EmulatorMainMessage(dto.Name));
+
+            Log.Information($"Selected Emulator: {dto.Name}");
         }
     }
 }
