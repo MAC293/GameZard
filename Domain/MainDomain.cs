@@ -1,14 +1,15 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using GameZard.DTO;
+using GameZard.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameZard.DTO;
-using GameZard.Models;
 
 namespace GameZard.Domain
 {
-    public class MainDomain
+    public class MainDomain : ObservableObject
     {
         private MainModel _MainModel;
         private EmulatorSavedataDTO _EmulatorSavedataDTO;
