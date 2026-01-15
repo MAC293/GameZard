@@ -1,19 +1,21 @@
 ﻿using GameZard.Context;
+using GameZard.DTO;
+using GameZard.Services;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameZard.DTO;
-using GameZard.Services;
-using Microsoft.EntityFrameworkCore;
+using Tmds.DBus.Protocol;
 
 namespace GameZard.Models
 {
     public class MainModel
     {
-
         private GameZardDbContext _Context;
+
         public MainModel()
         {
             Context = new GameZardDbContext();
@@ -28,9 +30,9 @@ namespace GameZard.Models
         //Returns the current selected emulator
         public async Task<EmulatorSavedataDTO> CurrentEmulatorAsync(String selectedEmulator)
         {
+            //Log.Information($"Current Emulator: {message.SelectedEmulator}");
 
-            //selectedEmulator comes as Save_PPSSPP converted from PPSSPP
-            var currentEmulator = await Context.EmulatorSavedata.FirstOrDefaultAsync(emulator => emulator.Id.Trim() == selectedEmulator);
+            var currentEmulator = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.Emulator.Trim() == selectedEmulator);
 
             if (currentEmulator != null)
             {
@@ -53,7 +55,12 @@ namespace GameZard.Models
         {
             var emulator = await Context.Emulators.FirstOrDefaultAsync(emulator => emulator.Name.Trim() == selectedEmulator.Trim());
 
-            return emulator.Icon;
+            if (emulator != null)
+            {
+                return emulator.Icon;
+            }
+
+            return Array.Empty<Byte>();
         }
     }
 }

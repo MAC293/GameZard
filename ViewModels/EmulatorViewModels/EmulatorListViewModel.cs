@@ -16,12 +16,12 @@ namespace GameZard.ViewModels.EmulatorViewModels
     public partial class EmulatorListViewModel
     {
         private ListDomain _ListDomain;
-        private EmulatorSavedataDTO _EmulatorSavedataDTO;
+        //private EmulatorSavedataDTO _EmulatorSavedataDTO;
 
         public EmulatorListViewModel()
         {
             ListDomain = new ListDomain();
-            EmulatorSavedataDTO = new EmulatorSavedataDTO();
+            //EmulatorSavedataDTO = new EmulatorSavedataDTO();
 
             WeakReferenceMessenger.Default.Register<EmulatorSelectedMessage>(this, (recipient, message) =>
             {
@@ -38,11 +38,12 @@ namespace GameZard.ViewModels.EmulatorViewModels
             get { return _ListDomain; }
             set { _ListDomain = value; }
         }
-        public EmulatorSavedataDTO EmulatorSavedataDTO
-        {
-            get { return _EmulatorSavedataDTO; }
-            set { _EmulatorSavedataDTO = value; }
-        }
+
+        //public EmulatorSavedataDTO EmulatorSavedataDTO
+        //{
+        //    get { return _EmulatorSavedataDTO; }
+        //    set { _EmulatorSavedataDTO = value; }
+        //}
 
         //Log.Information($"SelectedEmulatorAsync(): {emulatorSelectedModel}");
         [RelayCommand]
