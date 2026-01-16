@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using GameZard.Domain;
 using GameZard.DTO;
 using GameZard.Services;
 using Serilog;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GameZard.ViewModels.EmulatorViewModels
 {
-    public class EmulatorMainViewModel
+    public partial class EmulatorMainViewModel
     {
         private MainDomain _MainDomain;
 

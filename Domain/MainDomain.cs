@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace GameZard.Domain
 {
-    public class MainDomain : ObservableObject
+    public partial class MainDomain : ObservableObject
     {
         private MainModel _MainModel;
         private EmulatorSavedataDTO _EmulatorSavedataDTO;
 
         public MainDomain()
         {
-            MainModel = new MainModel();
             EmulatorSavedataDTO = new EmulatorSavedataDTO();
+            MainModel = new MainModel();
         }
 
         public MainModel MainModel
@@ -40,5 +40,22 @@ namespace GameZard.Domain
                 EmulatorSavedataDTO = savedata;
             }
         }
+
+        //public async Task DisplayEmulatorSavedataAsync(string selectedEmulator)
+        //{
+        //    var savedata = await MainModel.CurrentEmulatorAsync(selectedEmulator);
+
+        //    if (savedata == null)
+
+        //        return;
+
+        //    EmulatorSavedataDTO.ID = savedata.ID;
+        //    EmulatorSavedataDTO.Icon = savedata.Icon;
+        //    EmulatorSavedataDTO.BackUpMode = savedata.BackUpMode;
+        //    EmulatorSavedataDTO.FromPath = savedata.FromPath;
+        //    EmulatorSavedataDTO.ToPath = savedata.ToPath;
+        //    EmulatorSavedataDTO.LastSave = savedata.LastSave;
+        //}
+
     }
 }

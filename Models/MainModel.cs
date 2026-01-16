@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tmds.DBus.Protocol;
@@ -28,11 +30,13 @@ namespace GameZard.Models
         }
 
         //Returns the current selected emulator
+
+        //public IObservable<EmulatorSavedataDTO> CurrentEmulatorStream(string selectedEmulator)
         public async Task<EmulatorSavedataDTO> CurrentEmulatorAsync(String selectedEmulator)
         {
             //Log.Information($"Current Emulator: {message.SelectedEmulator}");
 
-            var currentEmulator = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.Emulator.Trim() == selectedEmulator);
+            var currentEmulator = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.Emulator.Trim() == selectedEmulator.Trim());
 
             if (currentEmulator != null)
             {
