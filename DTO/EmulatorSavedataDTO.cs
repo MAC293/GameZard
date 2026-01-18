@@ -14,22 +14,22 @@ namespace GameZard.DTO
         private String _ID;
 
         [ObservableProperty]
-        private Bitmap _Icon;
+        private Bitmap? _Icon;
 
         //[ObservableProperty]
         //private String _SelectedEmulator;
 
         [ObservableProperty]
-        private String _BackUpMode;
+        private String? _BackUpMode;
 
         [ObservableProperty]
-        private String _FromPath;
+        private String? _FromPath;
 
         [ObservableProperty]
-        private String _ToPath;
+        private String? _ToPath;
 
         [ObservableProperty]
-        private String _LastSave;
+        private String? _LastSave;
 
         //[ObservableProperty]
         //private String _Emulator;

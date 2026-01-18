@@ -8,6 +8,7 @@ namespace GameZard.Views;
 public partial class EmulatorMainView : UserControl
 {
     public EmulatorMainViewModel _EmulatorMainViewModel;
+
     public EmulatorMainView()
     {
         //EmulatorMainViewModel = new EmulatorMainViewModel();

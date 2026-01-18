@@ -42,12 +42,12 @@ namespace GameZard.Models
             {
                 return new EmulatorSavedataDTO
                 {
-                    ID = NameFormatter.FormatCurrentEmulatorName(currentEmulator.Id),
-                    Icon =  ImageConverter.BLOBToBitmap(await EmulatorIconAsync(NameFormatter.SimpleFormatCurrentEmulatorName(currentEmulator.Id))),
-                    BackUpMode = currentEmulator.BackupMode,
-                    FromPath = currentEmulator.FromPath,
-                    ToPath = currentEmulator.ToPath,
-                    LastSave = currentEmulator.LastSave
+                    ID = NameFormatter.FormatCurrentEmulatorName(currentEmulator.Id)
+                    //Icon =  ImageConverter.BLOBToBitmap(await EmulatorIconAsync(NameFormatter.SimpleFormatCurrentEmulatorName(currentEmulator.Id))),
+                    //BackUpMode = currentEmulator.BackupMode,
+                    //FromPath = currentEmulator.FromPath,
+                    //ToPath = currentEmulator.ToPath,
+                    //LastSave = currentEmulator.LastSave
                 };
             }
 

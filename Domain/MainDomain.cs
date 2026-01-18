@@ -11,6 +11,7 @@ namespace GameZard.Domain
 {
     public partial class MainDomain : ObservableObject
     {
+
         private MainModel _MainModel;
         private EmulatorSavedataDTO _EmulatorSavedataDTO;
 
@@ -31,31 +32,31 @@ namespace GameZard.Domain
             set { _EmulatorSavedataDTO = value; }
         }
 
+        //public async Task DisplayEmulatorSavedataAsync(String selectedEmulator)
+        //{
+        //    var savedata = await MainModel.CurrentEmulatorAsync(selectedEmulator);
+
+        //    if (savedata != null)
+        //    {
+        //        EmulatorSavedataDTO = savedata;
+        //    }
+        //}
+
         public async Task DisplayEmulatorSavedataAsync(String selectedEmulator)
         {
             var savedata = await MainModel.CurrentEmulatorAsync(selectedEmulator);
 
-            if (savedata != null)
-            {
-                EmulatorSavedataDTO = savedata;
-            }
+            if (savedata == null)
+
+                return;
+
+            EmulatorSavedataDTO.ID = savedata.ID;
+            EmulatorSavedataDTO.Icon = savedata.Icon;
+            EmulatorSavedataDTO.BackUpMode = savedata.BackUpMode;
+            EmulatorSavedataDTO.FromPath = savedata.FromPath;
+            EmulatorSavedataDTO.ToPath = savedata.ToPath;
+            EmulatorSavedataDTO.LastSave = savedata.LastSave;
         }
-
-        //public async Task DisplayEmulatorSavedataAsync(string selectedEmulator)
-        //{
-        //    var savedata = await MainModel.CurrentEmulatorAsync(selectedEmulator);
-
-        //    if (savedata == null)
-
-        //        return;
-
-        //    EmulatorSavedataDTO.ID = savedata.ID;
-        //    EmulatorSavedataDTO.Icon = savedata.Icon;
-        //    EmulatorSavedataDTO.BackUpMode = savedata.BackUpMode;
-        //    EmulatorSavedataDTO.FromPath = savedata.FromPath;
-        //    EmulatorSavedataDTO.ToPath = savedata.ToPath;
-        //    EmulatorSavedataDTO.LastSave = savedata.LastSave;
-        //}
 
     }
 }
