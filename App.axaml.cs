@@ -44,7 +44,7 @@ namespace GameZard
             var services = new ServiceCollection();
 
             //Register EmulatorMainViewModel as Singleton
-            services.AddSingleton<EmulatorMainViewModel>();
+            //services.AddSingleton<EmulatorMainViewModel>();
 
             //Register other VMs as needed  
             //services.AddTransient<EmulatorListViewModel>();
@@ -53,7 +53,7 @@ namespace GameZard
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                ServiceProvider.GetRequiredService<EmulatorMainViewModel>();
+                //ServiceProvider.GetRequiredService<EmulatorMainViewModel>();
 
                 desktop.MainWindow = new EmulatorView();
             }

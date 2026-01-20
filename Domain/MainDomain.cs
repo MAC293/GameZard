@@ -11,7 +11,6 @@ namespace GameZard.Domain
 {
     public partial class MainDomain : ObservableObject
     {
-
         private MainModel _MainModel;
         private EmulatorSavedataDTO _EmulatorSavedataDTO;
 
@@ -52,10 +51,10 @@ namespace GameZard.Domain
 
             EmulatorSavedataDTO.ID = savedata.ID;
             EmulatorSavedataDTO.Icon = savedata.Icon;
-            EmulatorSavedataDTO.BackUpMode = savedata.BackUpMode;
-            EmulatorSavedataDTO.FromPath = savedata.FromPath;
-            EmulatorSavedataDTO.ToPath = savedata.ToPath;
-            EmulatorSavedataDTO.LastSave = savedata.LastSave;
+            //EmulatorSavedataDTO.BackUpMode = savedata.BackUpMode;
+            //EmulatorSavedataDTO.FromPath = savedata.FromPath;
+            //EmulatorSavedataDTO.ToPath = savedata.ToPath;
+            //EmulatorSavedataDTO.LastSave = savedata.LastSave;
         }
 
     }

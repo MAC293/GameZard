@@ -11,7 +11,7 @@ namespace GameZard.DTO
     public partial class EmulatorSavedataDTO : ObservableObject
     {
         [ObservableProperty]
-        private String _ID;
+        private String? _ID;
 
         [ObservableProperty]
         private Bitmap? _Icon;
