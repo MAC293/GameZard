@@ -12,8 +12,8 @@ public partial class EmulatorMainView : UserControl
     public EmulatorMainView()
     {
         InitializeComponent();
-        EmulatorMainViewModel = new EmulatorMainViewModel();
-        DataContext = EmulatorMainViewModel;
+        DataContext = new EmulatorMainViewModel();
+        //DataContext = EmulatorMainViewModel;
 
     }
 

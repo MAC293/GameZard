@@ -11,10 +11,10 @@
         <StackPanel>
             <!--Emulator name-->
             <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
-                <Button Width="65" Height="65" Margin="0,0,16,0"/>
+                <Image Source="{Binding MainDomain.EmulatorSavedataDTO.Icon}" Width="80" Height="80" Margin="0,0,16,0"/>
                 <TextBlock Text="{Binding MainDomain.EmulatorSavedataDTO.ID}" FontSize="36" FontWeight="Bold" VerticalAlignment="Center" />
                 <Button Content="↻" Width="32" Height="32" Margin="16,0,0,0" VerticalAlignment="Center" />
-                <Image Source="{Binding MainDomain.EmulatorSavedataDTO.Icon}" Width="80" Height="80" Margin="0,0,16,0"/>
+                
             </StackPanel>
             <!--Backup mode-->
             <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
