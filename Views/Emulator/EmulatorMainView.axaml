@@ -9,31 +9,35 @@
 
     <ScrollViewer Margin="24,0,24,0">
         <StackPanel>
+
             <!--Emulator name-->
             <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
                 <Image Source="{Binding MainDomain.EmulatorSavedataDTO.Icon}" Width="80" Height="80" Margin="0,0,16,0"/>
                 <TextBlock Text="{Binding MainDomain.EmulatorSavedataDTO.ID}" FontSize="36" FontWeight="Bold" VerticalAlignment="Center" />
                 <Button Content="↻" Width="32" Height="32" Margin="16,0,0,0" VerticalAlignment="Center" />
-                
             </StackPanel>
+
             <!--Backup mode-->
             <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
                 <TextBlock Text="Backup Mode" FontSize="32" VerticalAlignment="Center"/>
                 <RadioButton Content="Automatically" GroupName="BackupMode" FontSize="28" Margin="80,0,0,0" VerticalAlignment="Center"/>
                 <RadioButton Content="Manually" GroupName="BackupMode" FontSize="28" Margin="10,0,0,0" VerticalAlignment="Center" IsChecked="True"/>
             </StackPanel>
+
             <!--From-->
             <TextBlock Text="From" FontSize="28" Margin="0,24,0,0"/>
             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                 <TextBox Width="400" FontSize="20" Text="..."/>
                 <Button Content="Browse" Width="100" Height="40" Margin="16,0,0,0"/>
             </StackPanel>
+
             <!--To-->
             <TextBlock Text="To" FontSize="28" Margin="0,24,0,0"/>
             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                 <TextBox Width="400" FontSize="20" Text="..."/>
                 <Button Content="Browse" Width="100" Height="40" Margin="16,0,0,0"/>
             </StackPanel>
+
             <!--Last save-->
             <TextBlock Text="Last Save: 01/04/2021 at 13:00/01:00 PM" FontSize="22" Margin="0,24,0,0"/>
         </StackPanel>
