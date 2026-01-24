@@ -52,8 +52,8 @@ namespace GameZard.Domain
             EmulatorSavedataDTO.ID = savedata.ID;
             EmulatorSavedataDTO.Icon = savedata.Icon;
             EmulatorSavedataDTO.BackUpMode = savedata.BackUpMode;
-            //EmulatorSavedataDTO.FromPath = savedata.FromPath;
-            //EmulatorSavedataDTO.ToPath = savedata.ToPath;
+            EmulatorSavedataDTO.FromPath = savedata.FromPath;
+            EmulatorSavedataDTO.ToPath = savedata.ToPath;
             //EmulatorSavedataDTO.LastSave = savedata.LastSave;
         }
 

@@ -29,7 +29,6 @@
                 <TextBlock Text="Backup Mode" FontSize="32" VerticalAlignment="Center"/>
  
                 <RadioButton Content="Automatically"
-                             GroupName="BackupMode"
                              FontSize="28" Margin="80,0,0,0"
                              IsChecked="{Binding MainDomain.EmulatorSavedataDTO.BackUpMode,
                                    Mode=TwoWay,
@@ -37,7 +36,6 @@
                                    ConverterParameter=Automatically}" />
  
                 <RadioButton Content="Manually"
-                             GroupName="BackupMode"
                              FontSize="28" Margin="10,0,0,0"
                              IsChecked="{Binding MainDomain.EmulatorSavedataDTO.BackUpMode,
                                    Mode=TwoWay,
@@ -48,14 +46,14 @@
 			<!--From-->
 			<TextBlock Text="From" FontSize="28" Margin="0,24,0,0"/>
 			<StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-				<TextBox Width="400" FontSize="20" Text="..."/>
+				<TextBox Width="400" FontSize="20" Text="{Binding MainDomain.EmulatorSavedataDTO.FromPath}"/>
 				<Button Content="Browse" Width="100" Height="40" Margin="16,0,0,0"/>
 			</StackPanel>
 
 			<!--To-->
 			<TextBlock Text="To" FontSize="28" Margin="0,24,0,0"/>
 			<StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-				<TextBox Width="400" FontSize="20" Text="..."/>
+				<TextBox Width="400" FontSize="20" Text="{Binding MainDomain.EmulatorSavedataDTO.ToPath}"/>
 				<Button Content="Browse" Width="100" Height="40" Margin="16,0,0,0"/>
 			</StackPanel>
 

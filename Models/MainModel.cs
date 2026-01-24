@@ -44,9 +44,9 @@ namespace GameZard.Models
                 {
                     ID = NameFormatter.FormatCurrentEmulatorName(currentEmulator.Id),
                     Icon =  ImageConverter.BLOBToBitmap(await EmulatorIconAsync(NameFormatter.SimpleFormatCurrentEmulatorName(currentEmulator.Id))),
-                    BackUpMode = currentEmulator.BackupMode
-                    //FromPath = currentEmulator.FromPath,
-                    //ToPath = currentEmulator.ToPath,
+                    BackUpMode = currentEmulator.BackupMode,
+                    FromPath = currentEmulator.FromPath,
+                    ToPath = currentEmulator.ToPath
                     //LastSave = currentEmulator.LastSave
                 };
             }
