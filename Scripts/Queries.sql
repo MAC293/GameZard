@@ -7,8 +7,12 @@ WHERE Is_Selected = 1;
 
 UPDATE Emulator_Savedata
 SET Backup_Mode = 'Manually'
-WHERE Backup_Mode = 'Automatic';
+WHERE Backup_Mode = 'Automatically';
 
 UPDATE Emulator_Savedata
-SET Backup_Mode = 'Manual'
+SET Backup_Mode = 'Manually'
 WHERE ID = 'Save_PPSSPP';
+
+UPDATE Emulator_Savedata
+SET Backup_Mode = 'Automatically'
+WHERE ID = 'Save_YUZU';

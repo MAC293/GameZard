@@ -7,7 +7,7 @@
 			 x:Class="GameZard.Views.EmulatorMainView"
 			 x:DataType="emulatorViewModels:EmulatorMainViewModel">
 
-	<ScrollViewer Margin="24,0,24,0">
+    <ScrollViewer Margin="24,0,24,0">
 		<StackPanel>
 
 			<!--Emulator name-->
@@ -17,30 +17,33 @@
 				<Button Content="↻" Width="32" Height="32" Margin="16,0,0,0" VerticalAlignment="Center" />
 			</StackPanel>
 
-			<!--Backup mode-->
+			<!--Backup mode—Original-->
 			<!--<StackPanel Orientation="Horizontal" Margin="0,24,0,0">
 			<TextBlock Text="Backup Mode" FontSize="32" VerticalAlignment="Center"/>
 			<RadioButton Content="Automatically" GroupName="BackupMode" FontSize="28" Margin="80,0,0,0" VerticalAlignment="Center"/>
 			<RadioButton Content="Manually" GroupName="BackupMode" FontSize="28" Margin="10,0,0,0" VerticalAlignment="Center" IsChecked="True"/>
 			</StackPanel>-->
 
-			<StackPanel Orientation="Horizontal" Margin="0,24,0,0">
-				<TextBlock Text="Backup Mode" FontSize="32" VerticalAlignment="Center"/>
-
+            <!--Backup mode-->
+            <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
+                <TextBlock Text="Backup Mode" FontSize="32" VerticalAlignment="Center"/>
+ 
                 <RadioButton Content="Automatically"
                              GroupName="BackupMode"
-                             FontSize="28"
-                             Margin="80,0,0,0"
-                             VerticalAlignment="Center"
-                             IsChecked="{Binding MainDomain.EmulatorSavedataDTO.BackUpMode}" />
-
+                             FontSize="28" Margin="80,0,0,0"
+                             IsChecked="{Binding MainDomain.EmulatorSavedataDTO.BackUpMode,
+                                   Mode=TwoWay,
+                                   Converter={StaticResource StringEqualsConverter},
+                                   ConverterParameter=Automatically}" />
+ 
                 <RadioButton Content="Manually"
                              GroupName="BackupMode"
-                             FontSize="28"
-                             Margin="10,0,0,0"
-                             VerticalAlignment="Center"
-                             IsChecked="{Binding MainDomain.EmulatorSavedataDTO.BackUpMode}" />
-			</StackPanel>
+                             FontSize="28" Margin="10,0,0,0"
+                             IsChecked="{Binding MainDomain.EmulatorSavedataDTO.BackUpMode,
+                                   Mode=TwoWay,
+                                   Converter={StaticResource StringEqualsConverter},
+                                   ConverterParameter=Manually}" />
+            </StackPanel>
 
 			<!--From-->
 			<TextBlock Text="From" FontSize="28" Margin="0,24,0,0"/>
