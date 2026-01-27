@@ -16,7 +16,7 @@
 				<TextBlock Text="{Binding MainDomain.EmulatorSavedataDTO.ID}" FontSize="36" FontWeight="Bold" VerticalAlignment="Center" />
 				<Button Content="↻" Width="32" Height="32" Margin="16,0,0,0" VerticalAlignment="Center" />
 			</StackPanel>
-
+			
 			<!--Backup mode-->
 			<StackPanel Orientation="Horizontal" Margin="0,24,0,0">
 				<TextBlock Text="Backup Mode" FontSize="32" VerticalAlignment="Center"/>
