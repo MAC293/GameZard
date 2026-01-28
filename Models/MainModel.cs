@@ -64,5 +64,19 @@ namespace GameZard.Models
 
             return Array.Empty<Byte>();
         }
+
+        //Update the backup mode of the selected emulator
+        public async Task UpdateBackupModeAsync(String selectedEmulator, String backupMode)
+        {
+            var emulatorSavedata = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.Emulator.Trim() == selectedEmulator.Trim());
+
+            if (emulatorSavedata != null)
+            {
+                emulatorSavedata.BackupMode = backupMode;
+                await Context.SaveChangesAsync();
+
+                //Log.Information($"Updated backup mode for {selectedEmulator} to {backupMode}");
+            }
+        }
     }
 }
