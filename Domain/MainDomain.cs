@@ -25,6 +25,7 @@ namespace GameZard.Domain
             get { return _MainModel; }
             set { _MainModel = value; }
         }
+
         public EmulatorSavedataDTO EmulatorSavedataDTO
         {
             get { return _EmulatorSavedataDTO; }
@@ -41,6 +42,7 @@ namespace GameZard.Domain
         //    }
         //}
 
+        //Display selected emulator savedata
         public async Task DisplayEmulatorSavedataAsync(String selectedEmulator)
         {
             var savedata = await MainModel.CurrentEmulatorAsync(selectedEmulator);

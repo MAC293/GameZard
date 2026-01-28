@@ -26,14 +26,14 @@
 							 IsChecked="{Binding MainDomain.EmulatorSavedataDTO.BackUpMode,
 							 Mode=TwoWay,
 							 Converter={StaticResource StringEqualsConverter},
-							 ConverterParameter=Automatically}" />
+							 ConverterParameter=Automatically}" Command="{Binding SelectBackupModeCommand}"/>
 
 				<RadioButton Content="Manually"
 							 FontSize="28" Margin="10,0,0,0"
 							 IsChecked="{Binding MainDomain.EmulatorSavedataDTO.BackUpMode,
 							 Mode=TwoWay,
 							 Converter={StaticResource StringEqualsConverter},
-							 ConverterParameter=Manually}" />
+							 ConverterParameter=Manually}" Command="{Binding SelectBackupModeCommand}"/>
 			</StackPanel>
 
 			<!--From-->

@@ -8,6 +8,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Serilog;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
         public EmulatorMainViewModel()
         {
             MainDomain = new MainDomain();
+            PropertyChangedName();
 
             WeakReferenceMessenger.Default.Register<EmulatorMainMessage>(this, async (recipient, message) =>
             {
@@ -41,6 +43,32 @@ namespace GameZard.ViewModels.EmulatorViewModels
         {
             await MainDomain.DisplayEmulatorSavedataAsync(selectedEmulator);
         }
+
+        #region Radio Button Commands
+        [RelayCommand]
+        public async Task SelectBackupMode()
+        {
+            //Automatically
+            Log.Information($"Selected backup mode: {MainDomain.EmulatorSavedataDTO.BackUpMode}");
+            
+            //PPSSPP
+            Log.Information($"Selected backup mode: {MainDomain.EmulatorSavedataDTO.ID}");
+
+            await MainDomain.MainModel.UpdateBackupModeAsync(NameFormatter.UnformatEmulatorName(MainDomain.EmulatorSavedataDTO.ID.Trim()), MainDomain.EmulatorSavedataDTO.BackUpMode);
+
+        }
+
+        private void PropertyChangedName()
+        {
+            MainDomain.EmulatorSavedataDTO.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(MainDomain.EmulatorSavedataDTO.BackUpMode))
+                {
+                    SelectBackupModeCommand.NotifyCanExecuteChanged();
+                }
+            };
+        }
+        #endregion
 
     }
 }

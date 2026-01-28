@@ -30,8 +30,6 @@ namespace GameZard.Models
         }
 
         //Returns the current selected emulator
-
-        //public IObservable<EmulatorSavedataDTO> CurrentEmulatorStream(string selectedEmulator)
         public async Task<EmulatorSavedataDTO> CurrentEmulatorAsync(String selectedEmulator)
         {
             //Log.Information($"Current Emulator: {message.SelectedEmulator}");
