@@ -75,7 +75,6 @@ namespace GameZard.Models
                 emulatorSavedata.BackupMode = backupMode;
                 await Context.SaveChangesAsync();
 
-                //Log.Information($"Updated backup mode for {selectedEmulator} to {backupMode}");
             }
         }
     }

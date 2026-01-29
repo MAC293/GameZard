@@ -22,6 +22,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
         {
             MainDomain = new MainDomain();
             PropertyChangedName();
+            PropertyChangedFromPath();
 
             WeakReferenceMessenger.Default.Register<EmulatorMainMessage>(this, async (recipient, message) =>
             {
@@ -44,7 +45,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
             await MainDomain.DisplayEmulatorSavedataAsync(selectedEmulator);
         }
 
-        #region Radio Button Commands
+        #region Radio Button Command
         [RelayCommand]
         public async Task SelectBackupMode()
         {
@@ -55,7 +56,6 @@ namespace GameZard.ViewModels.EmulatorViewModels
             Log.Information($"Selected backup mode: {MainDomain.EmulatorSavedataDTO.ID}");
 
             await MainDomain.MainModel.UpdateBackupModeAsync(NameFormatter.UnformatEmulatorName(MainDomain.EmulatorSavedataDTO.ID.Trim()), MainDomain.EmulatorSavedataDTO.BackUpMode);
-
         }
 
         private void PropertyChangedName()
@@ -70,5 +70,28 @@ namespace GameZard.ViewModels.EmulatorViewModels
         }
         #endregion
 
+        #region From Path Command
+        private Boolean CanFromPath()
+        {
+           
+        }
+
+        [RelayCommand(CanExecute = nameof(CanFromPath))]
+        private async Task FromPath()
+        {
+           
+        }
+
+        private void PropertyChangedFromPath()
+        {
+            MainDomain.EmulatorSavedataDTO.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(MainDomain.EmulatorSavedataDTO.FromPath))
+                {
+                    FromPathCommand.NotifyCanExecuteChanged();
+                }
+            };
+        }
+        #endregion
     }
 }
