@@ -56,6 +56,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
             Log.Information($"Selected backup mode: {MainDomain.EmulatorSavedataDTO.ID}");
 
             await MainDomain.MainModel.UpdateBackupModeAsync(NameFormatter.UnformatEmulatorName(MainDomain.EmulatorSavedataDTO.ID.Trim()), MainDomain.EmulatorSavedataDTO.BackUpMode);
+
         }
 
         private void PropertyChangedName()
