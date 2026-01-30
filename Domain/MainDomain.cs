@@ -11,8 +11,8 @@ namespace GameZard.Domain
 {
     public partial class MainDomain : ObservableObject
     {
-        private MainModel _MainModel;
         private EmulatorSavedataDTO _EmulatorSavedataDTO;
+        private MainModel _MainModel;
 
         public MainDomain()
         {

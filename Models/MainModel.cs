@@ -29,6 +29,7 @@ namespace GameZard.Models
             set { _Context = value; }
         }
 
+        #region Read Emulator
         //Returns the current selected emulator
         public async Task<EmulatorSavedataDTO> CurrentEmulatorAsync(String selectedEmulator)
         {
@@ -41,7 +42,7 @@ namespace GameZard.Models
                 return new EmulatorSavedataDTO
                 {
                     ID = NameFormatter.FormatCurrentEmulatorName(currentEmulator.Id),
-                    Icon =  ImageConverter.BLOBToBitmap(await EmulatorIconAsync(NameFormatter.SimpleFormatCurrentEmulatorName(currentEmulator.Id))),
+                    Icon = ImageConverter.BLOBToBitmap(await EmulatorIconAsync(NameFormatter.SimpleFormatCurrentEmulatorName(currentEmulator.Id))),
                     BackUpMode = currentEmulator.BackupMode,
                     FromPath = currentEmulator.FromPath,
                     ToPath = currentEmulator.ToPath,
@@ -64,7 +65,9 @@ namespace GameZard.Models
 
             return Array.Empty<Byte>();
         }
+        #endregion
 
+        #region Update Emulator
         //Update the backup mode of the selected emulator
         public async Task UpdateBackupModeAsync(String selectedEmulator, String backupMode)
         {
@@ -77,5 +80,18 @@ namespace GameZard.Models
 
             }
         }
+
+        //Update the FromPath of the selected emulator     
+        public async Task UpdateFromPathAsync(String selectedEmulator, String fromPath)
+        {
+            var emulatorSavedata = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.Emulator.Trim() == selectedEmulator.Trim());
+
+            if (emulatorSavedata != null)
+            {
+                emulatorSavedata.FromPath = fromPath;
+                await Context.SaveChangesAsync();
+            }
+        }
+        #endregion
     }
 }

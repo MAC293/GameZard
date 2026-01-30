@@ -40,6 +40,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
             set { _MainDomain = value; }
         }
 
+        //Display selected emulator savedata
         public async Task LoadEmulatorSavedataAsync(String selectedEmulator)
         {
             await MainDomain.DisplayEmulatorSavedataAsync(selectedEmulator);
@@ -72,15 +73,26 @@ namespace GameZard.ViewModels.EmulatorViewModels
         #endregion
 
         #region From Path Command
-        private Boolean CanFromPath()
+        public Boolean CanFromPath()
         {
-           
+            if (MainDomain.EmulatorSavedataDTO != null)
+            {
+                if (!String.IsNullOrEmpty(MainDomain.EmulatorSavedataDTO.FromPath))
+                {
+                    if (MainDomain.EmulatorSavedataDTO.FromPath.Length <= 250)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         [RelayCommand(CanExecute = nameof(CanFromPath))]
-        private async Task FromPath()
+        public async Task FromPath()
         {
-           
+            await MainDomain.MainModel.UpdateFromPathAsync(NameFormatter.UnformatEmulatorName(MainDomain.EmulatorSavedataDTO.ID.Trim()), MainDomain.EmulatorSavedataDTO.FromPath);
         }
 
         private void PropertyChangedFromPath()
