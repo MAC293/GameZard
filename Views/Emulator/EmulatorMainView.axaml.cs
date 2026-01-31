@@ -36,7 +36,7 @@ public partial class EmulatorMainView : UserControl
 
         var selectedPath = folders[0].Path.LocalPath;
 
-        //Asigning the selected path to the DTO's FromPath property
+        //Assigning the selected path to the DTO's FromPath property
         if (DataContext is EmulatorMainViewModel evm)
         {
             evm.MainDomain.EmulatorSavedataDTO.FromPath = selectedPath;
