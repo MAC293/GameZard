@@ -89,7 +89,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
             return false;
         }
 
-        [RelayCommand(CanExecute = nameof(CanAddFromPath))]
+        //[RelayCommand(CanExecute = nameof(CanAddFromPath))]
         public async Task AddFromPath()
         {
             await MainDomain.MainModel.UpdateFromPathAsync(NameFormatter.UnformatEmulatorName(MainDomain.EmulatorSavedataDTO.ID.Trim()), MainDomain.EmulatorSavedataDTO.FromPath);
@@ -97,11 +97,16 @@ namespace GameZard.ViewModels.EmulatorViewModels
 
         private void PropertyChangedFromPath()
         {
-            MainDomain.EmulatorSavedataDTO.PropertyChanged += (s, e) =>
+            MainDomain.EmulatorSavedataDTO.PropertyChanged += async (s, e) =>
             {
                 if (e.PropertyName == nameof(MainDomain.EmulatorSavedataDTO.FromPath))
                 {
-                    AddFromPathCommand.NotifyCanExecuteChanged();
+                    //AddFromPathCommand.NotifyCanExecuteChanged();
+                    if (CanAddFromPath())
+                    { 
+                      await AddFromPath();
+                    }
+
                 }
             };
         }
