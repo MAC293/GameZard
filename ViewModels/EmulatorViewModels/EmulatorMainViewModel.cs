@@ -23,6 +23,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
             MainDomain = new MainDomain();
             PropertyChangedName();
             PropertyChangedFromPath();
+            PropertyChangedToPath();
 
             WeakReferenceMessenger.Default.Register<EmulatorMainMessage>(this, async (recipient, message) =>
             {
@@ -105,6 +106,44 @@ namespace GameZard.ViewModels.EmulatorViewModels
                     if (CanAddFromPath())
                     { 
                       await AddFromPath();
+                    }
+
+                }
+            };
+        }
+        #endregion
+
+        #region To Path Command
+        public Boolean CanAddToPath()
+        {
+            if (MainDomain.EmulatorSavedataDTO != null)
+            {
+                if (!String.IsNullOrEmpty(MainDomain.EmulatorSavedataDTO.ToPath))
+                {
+                    if (MainDomain.EmulatorSavedataDTO.ToPath.Length <= 250)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public async Task AddToPath()
+        {
+            await MainDomain.MainModel.UpdateToPathAsync(NameFormatter.UnformatEmulatorName(MainDomain.EmulatorSavedataDTO.ID.Trim()), MainDomain.EmulatorSavedataDTO.ToPath);
+        }
+
+        private void PropertyChangedToPath()
+        {
+            MainDomain.EmulatorSavedataDTO.PropertyChanged += async (s, e) =>
+            {
+                if (e.PropertyName == nameof(MainDomain.EmulatorSavedataDTO.ToPath))
+                {
+                    if (CanAddToPath())
+                    {
+                        await AddToPath();
                     }
 
                 }

@@ -92,6 +92,18 @@ namespace GameZard.Models
                 await Context.SaveChangesAsync();
             }
         }
+
+        //Update the ToPath of the selected emulator     
+        public async Task UpdateToPathAsync(String selectedEmulator, String toPath)
+        {
+            var emulatorSavedata = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.Emulator.Trim() == selectedEmulator.Trim());
+
+            if (emulatorSavedata != null)
+            {
+                emulatorSavedata.ToPath = toPath;
+                await Context.SaveChangesAsync();
+            }
+        }
         #endregion
     }
 }
