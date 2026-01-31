@@ -21,7 +21,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
         public EmulatorMainViewModel()
         {
             MainDomain = new MainDomain();
-            PropertyChangedName();
+            PropertyChangedBackupMode();
             PropertyChangedFromPath();
             PropertyChangedToPath();
 
@@ -61,7 +61,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
 
         }
 
-        private void PropertyChangedName()
+        private void PropertyChangedBackupMode()
         {
             MainDomain.EmulatorSavedataDTO.PropertyChanged += (s, e) =>
             {
