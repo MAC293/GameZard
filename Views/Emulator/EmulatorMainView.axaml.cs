@@ -1,19 +1,32 @@
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using GameZard.ViewModels.EmulatorViewModels;
+using System;
+using System.Threading.Tasks;
+using ViewModels.EmulatorViewModels;
 
 namespace GameZard.Views;
 
 public partial class EmulatorMainView : UserControl
 {
+    private EmulatorMainViewModel _EmulatorMainViewModel;
+
     public EmulatorMainView()
     {
         InitializeComponent();
-        DataContext = new EmulatorMainViewModel();
+        //DataContext = new EmulatorMainViewModel();
+        EmulatorMainViewModel = new EmulatorMainViewModel();
+        LoadEmulatorAtFirstLoad();
+        DataContext = EmulatorMainViewModel;
+    }
+
+    public EmulatorMainViewModel EmulatorMainViewModel
+    {
+        get { return _EmulatorMainViewModel; }
+        set { _EmulatorMainViewModel = value; }
     }
 
     private async void BrowseFromPathFolder_Click(Object? Sender, RoutedEventArgs e)
@@ -72,5 +85,10 @@ public partial class EmulatorMainView : UserControl
             evm.MainDomain.EmulatorSavedataDTO.ToPath = selectedPath;
         }
 
+    }
+
+    public async Task LoadEmulatorAtFirstLoad()
+    {
+        await EmulatorMainViewModel.MainDomain.DisplayEmulatorSavedataStartAsync();
     }
 }

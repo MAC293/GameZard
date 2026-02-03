@@ -59,5 +59,22 @@ namespace GameZard.Domain
             EmulatorSavedataDTO.LastSave = savedata.LastSave;
         }
 
+        //Display first emulator savedata at startup
+        public async Task DisplayEmulatorSavedataStartAsync()
+        {
+            var savedata = await MainModel.LoadEmulatorsAsync();
+
+            if (savedata == null)
+
+                return;
+
+            EmulatorSavedataDTO.ID = savedata.ID;
+            EmulatorSavedataDTO.Icon = savedata.Icon;
+            EmulatorSavedataDTO.BackUpMode = savedata.BackUpMode;
+            EmulatorSavedataDTO.FromPath = savedata.FromPath;
+            EmulatorSavedataDTO.ToPath = savedata.ToPath;
+            EmulatorSavedataDTO.LastSave = savedata.LastSave;
+        }
+
     }
 }

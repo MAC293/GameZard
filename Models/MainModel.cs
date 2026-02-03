@@ -105,5 +105,26 @@ namespace GameZard.Models
             }
         }
         #endregion
+
+        //Return the first emulator savedata from the list at startup
+        public async Task<EmulatorSavedataDTO> LoadEmulatorsAsync()
+        {
+            var currentEmulator = await Context.EmulatorSavedata.FirstOrDefaultAsync();
+
+            if (currentEmulator != null)
+            {
+                return new EmulatorSavedataDTO
+                {
+                    ID = NameFormatter.FormatCurrentEmulatorName(currentEmulator.Id),
+                    Icon = ImageConverter.BLOBToBitmap(await EmulatorIconAsync(NameFormatter.SimpleFormatCurrentEmulatorName(currentEmulator.Id))),
+                    BackUpMode = currentEmulator.BackupMode,
+                    FromPath = currentEmulator.FromPath,
+                    ToPath = currentEmulator.ToPath,
+                    LastSave = currentEmulator.LastSave
+                };
+            }
+
+            return null;
+        }
     }
 }
