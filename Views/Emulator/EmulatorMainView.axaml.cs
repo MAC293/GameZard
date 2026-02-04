@@ -19,7 +19,8 @@ public partial class EmulatorMainView : UserControl
         InitializeComponent();
         //DataContext = new EmulatorMainViewModel();
         EmulatorMainViewModel = new EmulatorMainViewModel();
-        LoadEmulatorAtFirstLoad();
+        //Once the UI is fully loaded, awaits the LoadEmulatorAtFirstLoad().That line subscribes to the control’s Loaded event with an async handler that ignores the event arguments and, once the UI is fully loaded, awaits the LoadEmulatorAtFirstLoad() method to initialize your emulator data.
+        this.Loaded += async (_, __) => await LoadEmulatorAtFirstLoad();
         DataContext = EmulatorMainViewModel;
     }
 
