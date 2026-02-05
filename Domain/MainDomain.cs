@@ -32,16 +32,6 @@ namespace GameZard.Domain
             set { _EmulatorSavedataDTO = value; }
         }
 
-        //public async Task DisplayEmulatorSavedataAsync(String selectedEmulator)
-        //{
-        //    var savedata = await MainModel.CurrentEmulatorAsync(selectedEmulator);
-
-        //    if (savedata != null)
-        //    {
-        //        EmulatorSavedataDTO = savedata;
-        //    }
-        //}
-
         //Display selected emulator savedata
         public async Task DisplayEmulatorSavedataAsync(String selectedEmulator)
         {
