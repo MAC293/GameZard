@@ -47,7 +47,28 @@ namespace GameZard.ViewModels.EmulatorViewModels
             await MainDomain.DisplayEmulatorSavedataAsync(selectedEmulator);
         }
 
-        #region Radio Button Command
+        #region Backup command
+        //Perform every folder validation
+        public Boolean CanBackupNow()
+        {
+            return true;
+        }
+
+        //Perform the copy operation
+        [RelayCommand]
+        public async Task BackupNow()
+        {
+            if (CanBackupNow())
+            {
+                Log.Information($"true");
+                return;
+            }
+
+            Log.Information($"false");
+        }
+        #endregion
+
+        #region Radio Button command
         [RelayCommand]
         public async Task SelectBackupMode()
         {
@@ -73,7 +94,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
         }
         #endregion
 
-        #region From Path Command
+        #region From Path command
         public Boolean CanAddFromPath()
         {
             if (MainDomain.EmulatorSavedataDTO != null)
@@ -113,7 +134,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
         }
         #endregion
 
-        #region To Path Command
+        #region To Path command
         public Boolean CanAddToPath()
         {
             if (MainDomain.EmulatorSavedataDTO != null)

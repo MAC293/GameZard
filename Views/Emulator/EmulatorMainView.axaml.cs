@@ -19,7 +19,7 @@ public partial class EmulatorMainView : UserControl
         InitializeComponent();
         //DataContext = new EmulatorMainViewModel();
         EmulatorMainViewModel = new EmulatorMainViewModel();
-        //Once the UI is fully loaded, awaits the LoadEmulatorAtFirstLoad().That line subscribes to the control’s Loaded event with an async handler that ignores the event arguments and, once the UI is fully loaded, awaits the LoadEmulatorAtFirstLoad() method to initialize your emulator data.
+        //Once the UI is fully loaded, awaits the LoadEmulatorAtFirstLoad()
         this.Loaded += async (_, __) => await LoadEmulatorAtFirstLoad();
         DataContext = EmulatorMainViewModel;
     }
@@ -30,6 +30,8 @@ public partial class EmulatorMainView : UserControl
         set { _EmulatorMainViewModel = value; }
     }
 
+    #region Folder picker
+    //Triggers the folder picker to select the FromPath folder
     private async void BrowseFromPathFolder_Click(Object? Sender, RoutedEventArgs e)
     {
         var topLevel = TopLevel.GetTopLevel(this);
@@ -87,6 +89,7 @@ public partial class EmulatorMainView : UserControl
         }
 
     }
+    #endregion
 
     public async Task LoadEmulatorAtFirstLoad()
     {
