@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace GameZard.Services
 {
@@ -48,13 +50,16 @@ namespace GameZard.Services
         #endregion
 
         #region BackupNow
-        //TODO: "Overwrite the target folder without prompts using Delta" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+        //TODO: "Write/Overwrite the target folder without prompts using Delta" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
 
-        //Write on empty target folder
-        public static async Task BackupToEmptyTarget(String fromPath, String toPath)
-        {
-           
-        }
+        //TODO: "Generate and compare checksums to ensure to-path folders are identical" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+
+        //TODO: "Generate graceful failure if the files failed to copy. Log the error and carry on with the next file" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+
+        //TODO: "Notifications: success, failure, warning" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+
+        //TODO: "Set 'Last Save' variable after copying process is done". It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+
         #endregion
 
     }
