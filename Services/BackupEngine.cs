@@ -3,44 +3,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace GameZard.Services
 {
     public static class BackupEngine
     {
-        public static async Task CopyFolderAsync(String fromPath, String toPath)
+        #region CanBackupNow
+        //Check if target folder exists
+        public static Boolean TargetFolderExists(String targetFolder)
         {
-            await Task.Run(() =>
+            Boolean exists = Directory.Exists(targetFolder);
+
+            if (exists)
             {
-                //Ensure that the source folder exists
-                if (!System.IO.Directory.Exists(fromPath))
-                {
-                    throw new System.IO.DirectoryNotFoundException($"Source folder not found: {fromPath}");
-                }
+                return true;
+            }
 
-                //Create the destination folder if it doesn't exist
-                if (!System.IO.Directory.Exists(toPath))
-                {
-                    System.IO.Directory.CreateDirectory(toPath);
-                }
-
-                //Get the files in the source folder and copy them to the destination folder
-                foreach (var filePath in System.IO.Directory.GetFiles(fromPath))
-                {
-                    var fileName = System.IO.Path.GetFileName(filePath);
-                    var destFilePath = System.IO.Path.Combine(toPath, fileName);
-                    
-                    System.IO.File.Copy(filePath, destFilePath, true);
-                }
-
-                //Recursively copy subfolders
-                foreach (var directoryPath in System.IO.Directory.GetDirectories(fromPath))
-                {
-                    var directoryName = System.IO.Path.GetFileName(directoryPath);
-                    var destDirectoryPath = System.IO.Path.Combine(toPath, directoryName);
-                    CopyFolderAsync(directoryPath, destDirectoryPath).Wait();
-                }
-            });
+            return false;
         }
+
+        //Check program writing permissions on target folder
+        public static Boolean HasWritePermission(String targetFolder)
+        {
+            try
+            {
+                var testFile = Path.Combine(targetFolder, Path.GetRandomFileName());
+
+                using (File.Create(testFile)) { }
+
+                File.Delete(testFile);
+
+                return true; 
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //TODO: "Check if target folder is not being used by another process" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running in gameplay.
+
+        //TODO: "Check (MD5, SHA-256, etc) folder content corruption state". It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+        #endregion
+
+        #region BackupNow
+        //TODO: "Overwrite the target folder without prompts using Delta" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+
+        //Write on empty target folder
+        public static async Task BackupToEmptyTarget(String fromPath, String toPath)
+        {
+           
+        }
+        #endregion
+
     }
 }

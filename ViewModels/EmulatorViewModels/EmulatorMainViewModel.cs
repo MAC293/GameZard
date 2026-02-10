@@ -51,7 +51,13 @@ namespace GameZard.ViewModels.EmulatorViewModels
         //Perform every folder validation
         public Boolean CanBackupNow()
         {
-            return true;
+
+            if (BackupEngine.TargetFolderExists(MainDomain.EmulatorSavedataDTO.ToPath) && BackupEngine.HasWritePermission(MainDomain.EmulatorSavedataDTO.ToPath))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         //Perform the copy operation
@@ -60,11 +66,11 @@ namespace GameZard.ViewModels.EmulatorViewModels
         {
             if (CanBackupNow())
             {
-                Log.Information($"true");
+                Log.Information("Backing up!");
                 return;
             }
 
-            Log.Information($"false");
+            Log.Information("Not Backing up!");
         }
         #endregion
 
