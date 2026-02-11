@@ -59,7 +59,6 @@ namespace GameZard.Services
         //TODO: "Notifications: success, failure, warning" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
 
         //TODO: "Set 'Last Save' variable after copying process is done". It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
-
         #endregion
 
     }
