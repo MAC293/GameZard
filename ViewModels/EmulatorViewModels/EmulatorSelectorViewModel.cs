@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Serilog;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace ViewModels.EmulatorViewModels
@@ -84,10 +85,9 @@ namespace ViewModels.EmulatorViewModels
             return false;
         }
 
+        //Log.Information("SelectedEmulators != null");
         private Boolean IsAvailable()
         {
-            //Log.Information($"EmulatorDomain.SelectedEmulators.Count: {EmulatorDomain.SelectedEmulators.Count}");
-
             if (SelectorDomain.EmulatorDomain.SelectedEmulators.Count == 0)
             {
                 return true;

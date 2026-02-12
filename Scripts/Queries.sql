@@ -1,6 +1,10 @@
 SELECT * FROM Emulator;
 SELECT * FROM Emulator_Savedata;
 
+SELECT * FROM Emulator
+ORDER BY
+CASE WHEN Is_Selected = 1 THEN 0 ELSE 1 END;
+
 UPDATE Emulator
 SET Is_Selected = 0
 WHERE Is_Selected = 1;
