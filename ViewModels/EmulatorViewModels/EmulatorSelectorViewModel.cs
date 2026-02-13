@@ -77,33 +77,32 @@ namespace ViewModels.EmulatorViewModels
                 //return true;
                 if (IsAvailable())
                 {
-                    return true;
+                    return false;
                 }
 
             }
 
-            return false;
+            return true;
         }
 
         //Log.Information("SelectedEmulators != null");
-        private Boolean IsAvailable()
+        //Console.WriteLine("");
+        private async Task<Boolean> IsAvailable()
         {
-            if (SelectorDomain.EmulatorDomain.SelectedEmulators.Count == 0)
+            List<String> selectedEmulatorNames = await SelectorDomain.SelectorModel.SelectedEmulatorNamesAsync();
+
+            if (selectedEmulatorNames.Count == 0)
             {
                 return true;
             }
-            
-            if (SelectorDomain.EmulatorDomain.SelectedEmulators.Count >= 1)
+
+            String selectedEmulatorName = SelectorDomain.EmulatorDomain.Emulator.Name.Trim();
+
+            foreach (var emulatorName in selectedEmulatorNames)
             {
-                foreach (var emulator in SelectorDomain.EmulatorDomain.SelectedEmulators)
+                if (emulatorName.Trim() == selectedEmulatorName.Trim())
                 {
-                    foreach (var selectedEmulator in SelectorDomain.EmulatorDomain.Emulators)
-                    {
-                        if (emulator.Name.Trim() == selectedEmulator.Trim())
-                        {
-                            return false;
-                        }
-                    }
+                    return false;
                 }
             }
 

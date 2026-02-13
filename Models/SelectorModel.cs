@@ -108,5 +108,11 @@ namespace GameZard.Models
                 return null;
             }
         }
+
+        //Return a list of emulators name where IsSelected is true
+        public async Task<List<String>> SelectedEmulatorNamesAsync()
+        {
+            return await Context.Emulators.Where(e => e.IsSelected == true).Select(e => e.Name.Trim()).ToListAsync();
+        }
     }
 }
