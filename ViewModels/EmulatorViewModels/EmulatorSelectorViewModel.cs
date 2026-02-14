@@ -19,7 +19,7 @@ namespace ViewModels.EmulatorViewModels
     public partial class EmulatorSelectorViewModel
     {
         private SelectorDomain _SelectorDomain;
-        //private EmulatorDomain _EmulatorDomain;
+        private Boolean _IsEmulatorAvailableCache;
 
         public EmulatorSelectorViewModel()
         {
@@ -29,16 +29,16 @@ namespace ViewModels.EmulatorViewModels
             PropertyChangedName();
         }
 
-        //public EmulatorDomain EmulatorDomain
-        //{
-        //    get { return _EmulatorDomain; }
-        //    set { _EmulatorDomain = value; }
-        //}
-
         public SelectorDomain SelectorDomain
         {
             get { return _SelectorDomain; }
             set { _SelectorDomain = value; }
+        }
+
+        public Boolean IsEmulatorAvailableCache
+        {
+            get { return _IsEmulatorAvailableCache; }
+            set { _IsEmulatorAvailableCache = value; }
         }
 
         public ObservableCollection<String> FormattedEmulators()
@@ -74,12 +74,10 @@ namespace ViewModels.EmulatorViewModels
         {
             if (SelectorDomain.EmulatorDomain.Emulator.Name != "Select emulator")
             {
-                //return true;
                 if (IsAvailable())
                 {
                     return false;
                 }
-
             }
 
             return true;
@@ -100,13 +98,14 @@ namespace ViewModels.EmulatorViewModels
 
             foreach (var emulatorName in selectedEmulatorNames)
             {
-                if (emulatorName.Trim() == selectedEmulatorName.Trim())
+                if (emulatorName.Trim() != selectedEmulatorName.Trim())
                 {
-                    return false;
+                    
+                    return true;
                 }
             }
 
-            return true;
+            return false;
         }
 
         private void PropertyChangedName()
