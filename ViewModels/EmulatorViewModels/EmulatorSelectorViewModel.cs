@@ -24,9 +24,9 @@ namespace ViewModels.EmulatorViewModels
         public EmulatorSelectorViewModel()
         {
             SelectorDomain = new SelectorDomain();
-            //Use the same EmulatorDomain instance that SelectorDomain provides
-            //EmulatorDomain = new EmulatorDomain();
             PropertyChangedName();
+            //Ignore its return value, and don’t await it.
+            _ = IsAvailableAsync();
         }
 
         public SelectorDomain SelectorDomain
@@ -49,7 +49,7 @@ namespace ViewModels.EmulatorViewModels
 
         }
 
-        //Execute
+
         [RelayCommand(CanExecute = nameof(CanAddEmulator))]
         public async Task AddEmulator()
         {
@@ -58,9 +58,9 @@ namespace ViewModels.EmulatorViewModels
 
             await SelectorDomain.SelectorModel.SelectEmulatorAsync(unformattedEmulator);
 
-            var emulatorSelectedModel = await SelectorDomain.SelectorModel.SelectedEmulatorAsync(unformattedEmulator);
+            await IsAvailableAsync();
 
-            //Log.Information($"SelectedEmulatorAsync(): {emulatorSelectedModel}");
+            var emulatorSelectedModel = await SelectorDomain.SelectorModel.SelectedEmulatorAsync(unformattedEmulator);
 
             if (emulatorSelectedModel != null)
             {
@@ -69,38 +69,12 @@ namespace ViewModels.EmulatorViewModels
             }
         }
 
-        //CanExecute
         private Boolean CanAddEmulator()
         {
             if (SelectorDomain.EmulatorDomain.Emulator.Name != "Select emulator")
             {
-                if (IsAvailable())
+                if (IsEmulatorAvailableCache)
                 {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        //Log.Information("SelectedEmulators != null");
-        //Console.WriteLine("");
-        private async Task<Boolean> IsAvailable()
-        {
-            List<String> selectedEmulatorNames = await SelectorDomain.SelectorModel.SelectedEmulatorNamesAsync();
-
-            if (selectedEmulatorNames.Count == 0)
-            {
-                return true;
-            }
-
-            String selectedEmulatorName = SelectorDomain.EmulatorDomain.Emulator.Name.Trim();
-
-            foreach (var emulatorName in selectedEmulatorNames)
-            {
-                if (emulatorName.Trim() != selectedEmulatorName.Trim())
-                {
-                    
                     return true;
                 }
             }
@@ -108,12 +82,47 @@ namespace ViewModels.EmulatorViewModels
             return false;
         }
 
+        //Log.Information("SelectedEmulators != null");
+        //Console.WriteLine("");
+        private async Task IsAvailableAsync()
+        {
+            List<String> selectedEmulatorNames = await SelectorDomain.SelectorModel.SelectedEmulatorNamesAsync();
+
+            if (SelectorDomain.EmulatorDomain.Emulator == null || String.IsNullOrEmpty(SelectorDomain.EmulatorDomain.Emulator.Name))
+            {
+                IsEmulatorAvailableCache = false;
+                return;
+            }
+
+            String selectedEmulatorName = SelectorDomain.EmulatorDomain.Emulator.Name.Trim();
+
+            if (selectedEmulatorNames.Count == 0)
+            {
+                IsEmulatorAvailableCache = true;
+                return;
+            }
+
+            Boolean isAvailable = true;
+
+            foreach (var emulatorName in selectedEmulatorNames)
+            {
+                if (emulatorName.Trim() == selectedEmulatorName)
+                {
+                    isAvailable = false;
+                    break;
+                }
+            }
+
+            IsEmulatorAvailableCache = isAvailable;
+        }
+
         private void PropertyChangedName()
         {
-            SelectorDomain.EmulatorDomain.Emulator.PropertyChanged += (s, e) =>
+            SelectorDomain.EmulatorDomain.Emulator.PropertyChanged += async (s, e) =>
             {
                 if (e.PropertyName == nameof(SelectorDomain.EmulatorDomain.Emulator.Name))
                 {
+                    await IsAvailableAsync();
                     AddEmulatorCommand.NotifyCanExecuteChanged();
                 }
             };
