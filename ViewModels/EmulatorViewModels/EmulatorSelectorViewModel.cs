@@ -88,7 +88,8 @@ namespace ViewModels.EmulatorViewModels
         {
             List<String> selectedEmulatorNames = await SelectorDomain.SelectorModel.SelectedEmulatorNamesAsync();
 
-            if (SelectorDomain.EmulatorDomain.Emulator == null || String.IsNullOrEmpty(SelectorDomain.EmulatorDomain.Emulator.Name))
+            //SelectorDomain.EmulatorDomain.Emulator == null
+            if (String.IsNullOrEmpty(SelectorDomain.EmulatorDomain.Emulator.Name))
             {
                 IsEmulatorAvailableCache = false;
                 return;
