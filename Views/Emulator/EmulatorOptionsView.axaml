@@ -15,7 +15,6 @@
                     VerticalAlignment="Center"
                     Margin="40,0,0,0"
                     Grid.Column="0">
-            <Button Width="180" Content="Change emulator path" Margin="0,8,0,0"/>
             <Button Content="Remove Backup" Margin="8,8,0,0"/>
         </StackPanel>
 

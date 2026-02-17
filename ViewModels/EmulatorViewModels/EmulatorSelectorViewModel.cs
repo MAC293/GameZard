@@ -25,7 +25,7 @@ namespace ViewModels.EmulatorViewModels
         {
             SelectorDomain = new SelectorDomain();
             PropertyChangedName();
-            //Ignore its return value, and don’t await it.
+            //Ignore its return value, don’t await it, and discards Task to avoid warnings about not waiting the task (fire-and-forget)
             _ = IsAvailableAsync();
         }
 
