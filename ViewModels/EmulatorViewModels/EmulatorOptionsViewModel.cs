@@ -47,7 +47,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
 
             String shownEmulator = NameFormatter.UnformatEmulatorName(EmulatorSavedataDTO.Emulator);
 
-            String targetFolder = await OptionsDomain.OptionsModel.EmulatorTargetPathAsync(shownEmulator.Trim());
+            String targetFolder = await OptionsDomain.TargetPathAsync(shownEmulator.Trim());
             
 
             //Check if folder has any content within
