@@ -24,7 +24,7 @@ namespace GameZard.Domain
         }
 
         //Return ToPath from the current selected emulator
-        public async Task<String> TargetPath(String selectedEmulator)
+        public async Task<String> TargetPathAsync(String selectedEmulator)
         {
             return await OptionsModel.EmulatorTargetPathAsync(selectedEmulator);
         }

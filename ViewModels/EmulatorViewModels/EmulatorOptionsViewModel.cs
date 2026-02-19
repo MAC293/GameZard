@@ -20,7 +20,6 @@ namespace GameZard.ViewModels.EmulatorViewModels
         public EmulatorOptionsViewModel()
         {
             OptionsDomain = new OptionsDomain();
-            EmulatorSavedataDTO = new EmulatorSavedataDTO();
         }
 
         public OptionsDomain OptionsDomain
@@ -28,7 +27,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
             get { return _OptionsDomain; }
             set { _OptionsDomain = value; }
         }
-
+        
         public EmulatorSavedataDTO EmulatorSavedataDTO
         {
             get { return _EmulatorSavedataDTO; }
@@ -39,11 +38,11 @@ namespace GameZard.ViewModels.EmulatorViewModels
         #region Remove Backup Command
         public async Task<Boolean> CanRemoveBackup()
         {
+            //If I come to get path from the EmulatorSavedataDTO, instead from the database
             //String targetFolderPath = EmulatorSavedataDTO.ToPath;
 
             //If I have to get path from database instead from the View
-
-            Log.Information($"EmulatorSavedataDTO: {EmulatorSavedataDTO.ID}");
+            Log.Information($"EmulatorSavedataDTO: {EmulatorDomain.Emulator.Name}");
 
             String shownEmulator = NameFormatter.UnformatEmulatorName(EmulatorSavedataDTO.Emulator);
 

@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using GameZard.Domain;
+using GameZard.DTO;
 using GameZard.ViewModels.EmulatorViewModels;
 using GameZard.Views;
 using Microsoft.Extensions.DependencyInjection;
