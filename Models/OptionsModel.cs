@@ -28,6 +28,12 @@ namespace GameZard.Models
         {
             var emulatorSaveData = await Context.EmulatorSavedata.FirstOrDefaultAsync(e => e.Emulator == emulatorName);
 
+            if (String.IsNullOrEmpty(emulatorSaveData.ToPath))
+            {
+                emulatorSaveData.ToPath = String.Empty;
+                return emulatorSaveData?.ToPath.Trim();
+            }
+
             return emulatorSaveData?.ToPath.Trim();
         }
     }
