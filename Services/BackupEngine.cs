@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,14 +46,65 @@ namespace GameZard.Services
         }
 
         //TODO: "Check if target folder is not being used by another process" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running in gameplay.
-
-        //TODO: "Check (MD5, SHA-256, etc) folder content corruption state". It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
         #endregion
 
-        #region BackupNow
-        //TODO: "Write/Overwrite the target folder without prompts using Delta" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+        #region Backup Now
+        //Write/Overwrite the target folder without prompts using Delta
+        public static async Task BackupNowAsync(String sourcePath, String targetPath)
+        {
+            foreach (string sourceFilePath in Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories))
+            {
+                String relativePath = sourceFilePath.Substring(sourcePath.Length).TrimStart(Path.DirectorySeparatorChar);
+                String targetFilePath = Path.Combine(targetPath, relativePath);
 
-        //TODO: "Generate and compare checksums to ensure to-path folders are identical" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+                String targetDirectory = Path.GetDirectoryName(targetFilePath);
+                Directory.CreateDirectory(targetDirectory);
+
+                if (File.Exists(targetFilePath))
+                {
+                    String sourceChecksum = await CalculateFileChecksumAsync(sourceFilePath);
+                    String targetChecksum = await CalculateFileChecksumAsync(targetFilePath);
+
+                    if (sourceChecksum != targetChecksum)
+                    {
+                        File.Copy(sourceFilePath, targetFilePath, overwrite: true);
+                        //Console.WriteLine($"Updated: {relativePath}");
+                    }
+                }
+                else
+                {
+                    File.Copy(sourceFilePath, targetFilePath);
+                    //Console.WriteLine($"Copied: {relativePath}");
+                }
+            }
+
+            //Optionally, delete files in the target that no longer exist in the source
+            foreach (string targetFilePath in Directory.EnumerateFiles(targetPath, "*", SearchOption.AllDirectories))
+            {
+                String relativePath = targetFilePath.Substring(targetPath.Length).TrimStart(Path.DirectorySeparatorChar);
+                String sourceFilePath = Path.Combine(sourcePath, relativePath);
+
+                if (!File.Exists(sourceFilePath))
+                {
+                    File.Delete(targetFilePath);
+                    //Console.WriteLine($"Deleted: {relativePath}");
+                }
+            }
+        }
+
+        //Generate and compare checksums to ensure to-path folders are identical
+        //Check (MD5, SHA-256, etc) folder content corruption state
+        private static async Task<String> CalculateFileChecksumAsync(String filePath)
+        {
+            using (var md5 = MD5.Create())
+
+            using (var stream = File.OpenRead(filePath))
+            {
+                byte[] hashBytes = await md5.ComputeHashAsync(stream);
+
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+            }
+        }
 
         //TODO: "Generate graceful failure if the files failed to copy. Log the error and carry on with the next file" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
 

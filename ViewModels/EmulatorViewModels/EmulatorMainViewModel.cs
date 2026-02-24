@@ -48,6 +48,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
         }
 
         #region Backup command
+
         //Perform every folder validation
         public Boolean CanBackupNow()
         {
@@ -64,9 +65,10 @@ namespace GameZard.ViewModels.EmulatorViewModels
         [RelayCommand]
         public async Task BackupNow()
         {
-            if (CanBackupNow())
+            if (CanBackupNow()) 
             {
-                Log.Information("Backing up!");
+                //Log.Information("Backing up!");
+                await BackupEngine.BackupNowAsync(MainDomain.EmulatorSavedataDTO.FromPath.Trim(), MainDomain.EmulatorSavedataDTO.ToPath.Trim());
                 return;
             }
 
