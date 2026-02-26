@@ -104,6 +104,18 @@ namespace GameZard.Models
                 await Context.SaveChangesAsync();
             }
         }
+
+        //Update the LastSave of the selected emulator
+        public async Task UpdateLastSaveAsync(String currentEmulator, String lastSaveTimeDate)
+        {
+            var emulatorSavedata = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.Id.Trim() == currentEmulator.Trim());
+
+            if (emulatorSavedata != null)
+            {
+                emulatorSavedata.LastSave = lastSaveTimeDate;
+                await Context.SaveChangesAsync();
+            }
+        }
         #endregion
 
         //Return the first emulator savedata from the list at startup

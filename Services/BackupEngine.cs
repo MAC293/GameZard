@@ -7,6 +7,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using GameZard.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameZard.Services
 {
@@ -110,7 +112,14 @@ namespace GameZard.Services
 
         //TODO: "Notifications: success, failure, warning" is paused for now. It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
 
-        //TODO: "Set 'Last Save' variable after copying process is done". It'll be resumed later after all methods, and UIs are implemented, to avoid blocking the development process. It has to be running while a real backup data is created during gameplay.
+        //Set 'Last Save' variable after copying process is done
+        public static String LastSaveTimeDate(DateTime lastSaveTimeDate)
+        {
+            String date = lastSaveTimeDate.ToString("dd/MM/yyyy");
+            String time = lastSaveTimeDate.ToString("HH:mm");
+
+            return $"{date} at {time}";
+        }
         #endregion
 
     }

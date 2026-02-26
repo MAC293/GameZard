@@ -8,6 +8,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.JavaScript;
 using Serilog;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +70,14 @@ namespace GameZard.ViewModels.EmulatorViewModels
             {
                 //Log.Information("Backing up!");
                 await BackupEngine.BackupNowAsync(MainDomain.EmulatorSavedataDTO.FromPath.Trim(), MainDomain.EmulatorSavedataDTO.ToPath.Trim());
+
+                String currentEmulator = NameFormatter.UnformatCurrentEmulatorID(MainDomain.EmulatorSavedataDTO.ID.Trim());
+
+                String lastSave = BackupEngine.LastSaveTimeDate(DateTime.Now);
+
+                await MainDomain.MainModel.UpdateLastSaveAsync(currentEmulator, lastSave);
+
+                MainDomain.EmulatorSavedataDTO.LastSave = lastSave;
                 return;
             }
 
