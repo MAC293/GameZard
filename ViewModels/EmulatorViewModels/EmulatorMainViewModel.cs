@@ -78,6 +78,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
                 await MainDomain.MainModel.UpdateLastSaveAsync(currentEmulator, lastSave);
 
                 MainDomain.EmulatorSavedataDTO.LastSave = lastSave;
+
                 return;
             }
 
