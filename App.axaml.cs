@@ -27,6 +27,12 @@ namespace GameZard
             set { _ServiceProvider = value; }
         }
 
+        public AutoBackup AutoBackup
+        {
+            get { return _AutoBackup; }
+            set { _AutoBackup = value; }
+        }
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -65,12 +71,6 @@ namespace GameZard
             }
 
             base.OnFrameworkInitializationCompleted();
-        }
-
-        public AutoBackup AutoBackup
-        {
-            get { return _AutoBackup; }
-            set { _AutoBackup = value; }
         }
 
     }
