@@ -8,6 +8,7 @@ using GameZard.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
+using GameZard.Services.AutoBackupService;
 using ViewModels.EmulatorViewModels;
 
 namespace GameZard
@@ -18,6 +19,7 @@ namespace GameZard
         //public static EmulatorMainViewModel MainViewModel { get; } = new();
 
         private IServiceProvider _ServiceProvider;
+        private AutoBackup? _AutoBackup;
 
         public IServiceProvider ServiceProvider
         {
@@ -41,6 +43,9 @@ namespace GameZard
 
         public override void OnFrameworkInitializationCompleted()
         {
+            AutoBackup = new AutoBackup();
+            //await AutoBackup.StartAsync();
+
             //Configure DI
             var services = new ServiceCollection();
 
@@ -60,6 +65,12 @@ namespace GameZard
             }
 
             base.OnFrameworkInitializationCompleted();
+        }
+
+        public AutoBackup AutoBackup
+        {
+            get { return _AutoBackup; }
+            set { _AutoBackup = value; }
         }
 
     }
