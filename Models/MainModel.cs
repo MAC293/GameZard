@@ -138,5 +138,24 @@ namespace GameZard.Models
 
             return null;
         }
+
+        //Return all emulatorsavedata (ID, backup mode, from, to, last save) where backup mode is automatically 
+        public async Task<List<EmulatorSavedataDTO>> AutomaticSavedataAsync()
+        {
+            var autoBackupEmulators = await Context.EmulatorSavedata.Where(savedata => savedata.BackupMode.Trim() == "Automatically").ToListAsync();
+
+            if (autoBackupEmulators != null)
+            {
+                return autoBackupEmulators.Select(emulator => new EmulatorSavedataDTO
+                {
+                    ID = NameFormatter.FormatCurrentEmulatorName(emulator.Id),
+                    FromPath = emulator.FromPath,
+                    ToPath = emulator.ToPath,
+                    LastSave = emulator.LastSave
+                }).ToList();
+            }
+
+            return new List<EmulatorSavedataDTO>();
+        }
     }
 }

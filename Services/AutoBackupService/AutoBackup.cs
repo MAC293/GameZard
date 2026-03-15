@@ -8,6 +8,14 @@ namespace GameZard.Services.AutoBackupService
 {
     public class AutoBackup
     {
+        public AutoBackup()
+        {
 
+        }
+
+        public async Task StartAsync()
+        {
+            
+        }
     }
 }
