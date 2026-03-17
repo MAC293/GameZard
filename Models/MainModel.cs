@@ -139,7 +139,7 @@ namespace GameZard.Models
             return null;
         }
 
-        //Return all emulatorsavedata (ID, backup mode, from, to, last save) where backup mode is automatically 
+        //Return all Emulatorsavedata (ID, backup mode, from, to, last save) where backup mode is automatically 
         public async Task<List<EmulatorSavedataDTO>> AutomaticSavedataAsync()
         {
             var autoBackupEmulators = await Context.EmulatorSavedata.Where(savedata => savedata.BackupMode.Trim() == "Automatically").ToListAsync();
