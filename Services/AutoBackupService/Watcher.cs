@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameZard.Services.AutoBackupService
-{
+{ 
     public class Watcher : IDisposable
     {
         private List<FileSystemWatcher> _Watchers;
