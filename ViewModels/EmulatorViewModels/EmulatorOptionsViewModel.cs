@@ -58,7 +58,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
         #region Remove Backup Command
         public async Task<Boolean> CanRemoveBackup()
         {
-            Log.Information($"TargetFolderPath: {TargetFolderPath}");
+            //Log.Information($"TargetFolderPath: {TargetFolderPath}");
 
             //Check if folder has any content within
             Boolean hasContent = Directory.EnumerateFileSystemEntries(TargetFolderPath).Any();

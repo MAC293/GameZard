@@ -11,6 +11,7 @@ namespace GameZard.Services.AutoBackupService
     public class Watcher : IDisposable
     {
         private List<FileSystemWatcher> _Watchers;
+        private readonly Debounce _Debounce = new();
 
         public Watcher()
         {
@@ -54,14 +55,19 @@ namespace GameZard.Services.AutoBackupService
             FileChanged?.Invoke(emulator, e);
         }
 
+        private void DebounceEvent(EmulatorSavedataDTO emulator, FileSystemEventArgs e)
+        {
+            _Debounce.Execute(emulator.ID, 2000, () => OnFileChanged(emulator, e));
+        }
+
         //Due to IDisposable implementation, resources are cleaned up when the FileSystemWatcher instances are no longer needed, preventing memory leaks and ensuring efficient resource management
         public void Dispose()
         {
             foreach (var watcher in Watchers)
-
                 watcher.Dispose();
 
             Watchers.Clear();
+            _Debounce.Dispose();
         }
     }
 }

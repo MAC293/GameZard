@@ -30,7 +30,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
             {
                 if (!String.IsNullOrWhiteSpace(message.SelectedEmulator))
                 {
-                    Log.Information($"Current Emulator: {message.SelectedEmulator}");
+                    //Log.Information($"Current Emulator: {message.SelectedEmulator}");
                     await LoadEmulatorSavedataAsync(NameFormatter.UnformatEmulatorName(message.SelectedEmulator));
                 }
             });
@@ -91,10 +91,10 @@ namespace GameZard.ViewModels.EmulatorViewModels
         public async Task SelectBackupMode()
         {
             //Automatically
-            Log.Information($"Selected backup mode: {MainDomain.EmulatorSavedataDTO.BackUpMode}");
+            //Log.Information($"Selected backup mode: {MainDomain.EmulatorSavedataDTO.BackUpMode}");
             
             //PPSSPP
-            Log.Information($"Selected backup mode: {MainDomain.EmulatorSavedataDTO.ID}");
+            //Log.Information($"Selected backup mode: {MainDomain.EmulatorSavedataDTO.ID}");
 
             await MainDomain.MainModel.UpdateBackupModeAsync(NameFormatter.UnformatEmulatorName(MainDomain.EmulatorSavedataDTO.ID.Trim()), MainDomain.EmulatorSavedataDTO.BackUpMode);
 

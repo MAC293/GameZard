@@ -50,7 +50,7 @@ namespace GameZard
         public override void OnFrameworkInitializationCompleted()
         {
             AutoBackup = new AutoBackup();
-            //await AutoBackup.StartAsync();
+            //_ = AutoBackup.StartAsync();
 
             //Configure DI
             var services = new ServiceCollection();

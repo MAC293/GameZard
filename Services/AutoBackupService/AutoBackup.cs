@@ -1,4 +1,5 @@
 ﻿using GameZard.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,10 +12,14 @@ namespace GameZard.Services.AutoBackupService
     public class AutoBackup
     {
         private MainModel _MainModel;
+        private Watcher _Watcher;
 
         public AutoBackup()
         {
             MainModel = new MainModel();
+            Watcher = new Watcher();
+            _ = StartAsync();
+            //Log.Information($"Selected Emulator: {dto.Name}");
         }
 
         public MainModel MainModel
@@ -22,10 +27,16 @@ namespace GameZard.Services.AutoBackupService
             get { return _MainModel; }
             set { _MainModel = value; }
         }
+        
+        public Watcher Watcher
+        {
+            get { return _Watcher; }
+            set { _Watcher = value; }
+        }
 
         public async Task StartAsync()
         {
-            
+            await Watcher.WatchersCreation(await MainModel.AutomaticSavedataAsync());
         }
     }
 }

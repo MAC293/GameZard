@@ -68,7 +68,7 @@ namespace GameZard.ViewModels.EmulatorViewModels
 
             WeakReferenceMessenger.Default.Send(new EmulatorMainMessage(dto.Name));
 
-            Log.Information($"Selected Emulator: {dto.Name}");
+            //Log.Information($"Selected Emulator: {dto.Name}");
         }
     }
 }
