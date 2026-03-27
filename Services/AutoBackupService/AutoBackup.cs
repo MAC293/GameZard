@@ -18,7 +18,6 @@ namespace GameZard.Services.AutoBackupService
         {
             MainModel = new MainModel();
             Watcher = new Watcher();
-            _ = StartAsync();
             //Log.Information($"Selected Emulator: {dto.Name}");
         }
 
@@ -36,7 +35,18 @@ namespace GameZard.Services.AutoBackupService
 
         public async Task StartAsync()
         {
-            await Watcher.WatchersCreation(await MainModel.AutomaticSavedataAsync());
+            Log.Information("AutoBackup service starting...");
+
+            //Query emulators from database
+            var emulators = await MainModel.AutomaticSavedataAsync();
+
+            //Watchers creation for each emulator savedata from-to path
+            await Watcher.WatchersCreation(emulators);
+        }
+
+        public void Stop()
+        {
+            Watcher.Dispose();
         }
     }
 }

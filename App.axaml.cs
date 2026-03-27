@@ -51,6 +51,8 @@ namespace GameZard
         {
             AutoBackup = new AutoBackup();
             //_ = AutoBackup.StartAsync();
+            _ = AutoBackup.StartAsync();
+
 
             //Configure DI
             var services = new ServiceCollection();

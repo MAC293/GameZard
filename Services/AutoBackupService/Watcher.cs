@@ -1,4 +1,7 @@
-﻿using GameZard.DTO;
+﻿using GameZard.Context;
+using GameZard.DTO;
+using GameZard.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,25 +42,43 @@ namespace GameZard.Services.AutoBackupService
                     NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName
                 };
 
-                watcher.Changed += (s, e) => OnFileChanged(emulator, e);
-                watcher.Created += (s, e) => OnFileChanged(emulator, e);
-                watcher.Renamed += (s, e) => OnFileChanged(emulator, e);
+                watcher.Changed += (s, e) => DebounceEvent(emulator, e);
+                watcher.Created += (s, e) => DebounceEvent(emulator, e);
+                watcher.Renamed += (s, e) => DebounceEvent(emulator, e);
 
                 watcher.EnableRaisingEvents = true;
                 Watchers.Add(watcher);
             }
         }
 
-        public event Action<EmulatorSavedataDTO, FileSystemEventArgs>? FileChanged;
-
-        private void OnFileChanged(EmulatorSavedataDTO emulator, FileSystemEventArgs e)
-        {
-            FileChanged?.Invoke(emulator, e);
-        }
-
         private void DebounceEvent(EmulatorSavedataDTO emulator, FileSystemEventArgs e)
         {
             _Debounce.Execute(emulator.ID, 2000, () => OnFileChanged(emulator, e));
+        }
+
+        private async void OnFileChanged(EmulatorSavedataDTO emulator, FileSystemEventArgs e)
+        {
+            try
+            {
+                // Check target folder and permissions
+                if (BackupEngine.TargetFolderExists(emulator.ToPath) &&
+                    BackupEngine.HasWritePermission(emulator.ToPath))
+                {
+                    //Perform backup
+                    await BackupEngine.BackupNowAsync(emulator.FromPath, emulator.ToPath);
+
+
+                    Log.Information($"Backup completed for emulator {emulator.ID} at {e.FullPath}");
+                }
+                else
+                {
+                    Log.Warning($"Backup skipped for emulator {emulator.ID}: target path invalid or no permission.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, $"Error during backup for emulator {emulator.ID}");
+            }
         }
 
         //Due to IDisposable implementation, resources are cleaned up when the FileSystemWatcher instances are no longer needed, preventing memory leaks and ensuring efficient resource management
