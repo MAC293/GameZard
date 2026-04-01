@@ -39,12 +39,15 @@ namespace GameZard.Services.AutoBackupService
                 var watcher = new FileSystemWatcher(emulator.FromPath)
                 {
                     IncludeSubdirectories = true,
-                    NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName
+                    NotifyFilter = NotifyFilters.LastWrite
+                                   | NotifyFilters.FileName
+                                   | NotifyFilters.DirectoryName
                 };
 
                 watcher.Changed += (s, e) => DebounceEvent(emulator, e);
                 watcher.Created += (s, e) => DebounceEvent(emulator, e);
                 watcher.Renamed += (s, e) => DebounceEvent(emulator, e);
+                watcher.Deleted += (s, e) => DebounceEvent(emulator, e);
 
                 watcher.EnableRaisingEvents = true;
                 Watchers.Add(watcher);
