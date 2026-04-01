@@ -54,12 +54,15 @@ namespace GameZard.Services
         //Write/Overwrite the target folder without prompts using Delta
         public static async Task BackupNowAsync(String sourcePath, String targetPath)
         {
-            foreach (string sourceFilePath in Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories))
+            //Copy or update files
+            foreach (String sourceFilePath in Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories))
             {
                 String relativePath = sourceFilePath.Substring(sourcePath.Length).TrimStart(Path.DirectorySeparatorChar);
+
                 String targetFilePath = Path.Combine(targetPath, relativePath);
 
                 String targetDirectory = Path.GetDirectoryName(targetFilePath);
+
                 Directory.CreateDirectory(targetDirectory);
 
                 if (File.Exists(targetFilePath))
@@ -70,32 +73,45 @@ namespace GameZard.Services
                     if (sourceChecksum != targetChecksum)
                     {
                         File.Copy(sourceFilePath, targetFilePath, overwrite: true);
-                        //Console.WriteLine($"Updated: {relativePath}");
                     }
                 }
                 else
                 {
                     File.Copy(sourceFilePath, targetFilePath);
-                    //Console.WriteLine($"Copied: {relativePath}");
                 }
             }
 
-            //Optionally, delete files in the target that no longer exist in the source
+            //Delete files in target that no longer exist in source
             foreach (String targetFilePath in Directory.EnumerateFiles(targetPath, "*", SearchOption.AllDirectories))
             {
                 String relativePath = targetFilePath.Substring(targetPath.Length).TrimStart(Path.DirectorySeparatorChar);
+
                 String sourceFilePath = Path.Combine(sourcePath, relativePath);
 
                 if (!File.Exists(sourceFilePath))
                 {
                     File.Delete(targetFilePath);
-                    //Console.WriteLine($"Deleted: {relativePath}");
+                }
+            }
+
+            //Delete directories in target that no longer exist in source
+            foreach (String targetDirPath in Directory.EnumerateDirectories(targetPath, "*", SearchOption.AllDirectories))
+            {
+                String relativePath = targetDirPath.Substring(targetPath.Length).TrimStart(Path.DirectorySeparatorChar);
+
+                String sourceDirPath = Path.Combine(sourcePath, relativePath);
+
+                if (!Directory.Exists(sourceDirPath))
+                {
+                    //Removes folder + contents
+                    Directory.Delete(targetDirPath, recursive: true); 
                 }
             }
         }
 
-        //Generate and compare checksums to ensure to-path folders are identical
-        //Check (MD5, SHA-256, etc) folder content corruption state
+        /*Generate and compare checksums to ensure to-path folders are identical
+        Check (MD5, SHA-256, etc) folder content corruption state
+        */
         private static async Task<String> CalculateFileChecksumAsync(String filePath)
         {
             using (var md5 = MD5.Create())
