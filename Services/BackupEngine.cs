@@ -81,7 +81,7 @@ namespace GameZard.Services
             }
 
             //Optionally, delete files in the target that no longer exist in the source
-            foreach (string targetFilePath in Directory.EnumerateFiles(targetPath, "*", SearchOption.AllDirectories))
+            foreach (String targetFilePath in Directory.EnumerateFiles(targetPath, "*", SearchOption.AllDirectories))
             {
                 String relativePath = targetFilePath.Substring(targetPath.Length).TrimStart(Path.DirectorySeparatorChar);
                 String sourceFilePath = Path.Combine(sourcePath, relativePath);

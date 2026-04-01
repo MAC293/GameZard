@@ -25,6 +25,7 @@ namespace GameZard.Services.AutoBackupService
             }
 
             var timer = new Timer(delayMilliseconds);
+
             timer.AutoReset = false; 
             timer.Elapsed += (s, e) =>
             {
