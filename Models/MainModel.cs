@@ -118,6 +118,8 @@ namespace GameZard.Models
         }
         #endregion
 
+
+        #region Others
         //Return the first emulator savedata from the list at startup
         public async Task<EmulatorSavedataDTO> LoadEmulatorsAsync()
         {
@@ -157,5 +159,19 @@ namespace GameZard.Models
 
             return new List<EmulatorSavedataDTO>();
         }
+
+        //Return ID of the EmulatorSavedata matching the FromPath/ToPath
+        public async Task<String> EmulatorIDByPathsAsync(String fromPath, String toPath)
+        {
+            var emulatorSavedata = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.FromPath.Trim() == fromPath.Trim() && savedata.ToPath.Trim() == toPath.Trim());
+
+            if (emulatorSavedata != null)
+            {
+                return emulatorSavedata.Id;
+            }
+
+            return String.Empty;
+        }
+        #endregion
     }
 }

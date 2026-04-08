@@ -63,7 +63,7 @@ namespace GameZard.Services.AutoBackupService
         {
             try
             {
-                // Check target folder and permissions
+                //Check target folder and permissions
                 if (BackupEngine.TargetFolderExists(emulator.ToPath) &&
                     BackupEngine.HasWritePermission(emulator.ToPath))
                 {
