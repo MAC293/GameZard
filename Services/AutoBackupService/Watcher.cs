@@ -15,6 +15,7 @@ namespace GameZard.Services.AutoBackupService
     {
         private List<FileSystemWatcher> _Watchers;
         private readonly Debounce _Debounce = new();
+        private readonly MainModel MainModel = new();
 
         public Watcher()
         {
@@ -69,6 +70,14 @@ namespace GameZard.Services.AutoBackupService
                 {
                     //Perform backup
                     await BackupEngine.BackupNowAsync(emulator.FromPath, emulator.ToPath);
+
+                    //Update Last Save from Automatic backup
+                    //ID from EmulatorSavedata
+                    String ID = await MainModel.EmulatorIDByPathsAsync(emulator.FromPath, emulator.ToPath);
+                    //Last time backup
+                    String lastSave = BackupEngine.LastSaveTimeDate(DateTime.Now);
+                    //Create a new save time on backup
+                    _ = MainModel.UpdateLastSaveAsync(ID, lastSave);
 
 
                     Log.Information($"Backup completed for emulator {emulator.ID} at {e.FullPath}");
