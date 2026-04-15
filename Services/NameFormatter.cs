@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GameZard.Services
 {
@@ -25,7 +26,7 @@ namespace GameZard.Services
                 {
                     formatted.Add("Dolphin (GameCube)");
                 }
-                else if (!string.IsNullOrEmpty(emulator))
+                else if (!String.IsNullOrEmpty(emulator))
                 {
                     formatted.Add(emulator.Replace("_", " "));
                 }
@@ -134,6 +135,13 @@ namespace GameZard.Services
             String formattedName = currentEmulatorID.Replace("Save_", "").Trim();
 
             return formattedName;
+        }
+
+        //Add Save_ to current working emulator's name, and format Dolphin's name
+        public static String FormatEmulatorNameToSavedataID(String selectedEmulator)
+        {
+            return $"Save_{selectedEmulator}";
+
         }
         #endregion
 

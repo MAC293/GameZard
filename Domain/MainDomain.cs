@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameZard.Services;
 
 namespace GameZard.Domain
 {
+    //Log.Information("SelectedEmulators != null");
     public partial class MainDomain : ObservableObject
     {
         private EmulatorSavedataDTO _EmulatorSavedataDTO;
@@ -52,7 +54,10 @@ namespace GameZard.Domain
         //Display first emulator savedata at startup
         public async Task DisplayEmulatorSavedataStartAsync()
         {
-            var savedata = await MainModel.LoadEmulatorsAsync();
+            String emulatorIDRaw = await MainModel.SelectedEmulatorIDAsync();
+            String emulatorIDFormatted =  NameFormatter.FormatEmulatorNameToSavedataID(emulatorIDRaw);
+
+            var savedata = await MainModel.LoadEmulatorsAsync(emulatorIDFormatted);
 
             if (savedata == null)
 

@@ -118,12 +118,25 @@ namespace GameZard.Models
         }
         #endregion
 
-
-        #region Others
-        //Return the first emulator savedata from the list at startup
-        public async Task<EmulatorSavedataDTO> LoadEmulatorsAsync()
+        #region First Load EmulatorSavedata
+        //Return ID from the first emulator where its Is_Selected is true
+        public async Task<String> SelectedEmulatorIDAsync()
         {
-            var currentEmulator = await Context.EmulatorSavedata.FirstOrDefaultAsync();
+            var selectedEmulator = await Context.Emulators.FirstOrDefaultAsync(savedata => savedata.IsSelected == true);
+
+            if (selectedEmulator != null)
+            {
+                return selectedEmulator.Name;
+            }
+
+            return String.Empty;
+        }
+
+
+        //Return the first emulator savedata from the list at startup
+        public async Task<EmulatorSavedataDTO> LoadEmulatorsAsync(String emulatorID)
+        {
+            var currentEmulator = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.Id.Trim() == emulatorID.Trim());
 
             if (currentEmulator != null)
             {
@@ -140,7 +153,9 @@ namespace GameZard.Models
 
             return null;
         }
+        #endregion
 
+        #region Others
         //Return all Emulatorsavedata (ID, backup mode, from, to, last save) where backup mode is automatically 
         public async Task<List<EmulatorSavedataDTO>> AutomaticSavedataAsync()
         {
@@ -163,14 +178,13 @@ namespace GameZard.Models
         //Return ID of the EmulatorSavedata matching the FromPath/ToPath
         public async Task<String> EmulatorIDByPathsAsync(String fromPath, String toPath)
         {
-            var emulatorSavedata = await Context.EmulatorSavedata.FirstOrDefaultAsync(savedata => savedata.FromPath.Trim() == fromPath.Trim() && savedata.ToPath.Trim() == toPath.Trim());
+            String normalizedFrom = fromPath?.Trim();
+            String normalizedTo = toPath?.Trim();
 
-            if (emulatorSavedata != null)
-            {
-                return emulatorSavedata.Id;
-            }
+            var emulatorSavedata = await Context.EmulatorSavedata
+                .FirstOrDefaultAsync(savedata => savedata.FromPath == normalizedFrom && savedata.ToPath == normalizedTo);
 
-            return String.Empty;
+            return emulatorSavedata?.Id ?? String.Empty;
         }
         #endregion
     }
