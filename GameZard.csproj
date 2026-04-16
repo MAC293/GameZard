@@ -13,7 +13,6 @@
     <PackageReference Include="Avalonia.Desktop" Version="11.3.2" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.2" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.2" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Include="Avalonia.Diagnostics" Version="11.3.2">
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
@@ -45,5 +44,12 @@
     <Compile Update="Views\Emulator\EmulatorView.axaml.cs">
       <DependentUpon>EmulatorView.axaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <!--New block-->
+  <ItemGroup>
+    <None Update="Database\GameZard.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
