@@ -7,7 +7,7 @@
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 		x:Class="GameZard.Views.EmulatorView"
 		Title="Emulator"
-		Width="1150" Height="510">
+		Width="1150" Height="510" CanResize="False">
 
 	<Grid>
 		<Grid.ColumnDefinitions>
