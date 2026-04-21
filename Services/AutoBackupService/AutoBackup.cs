@@ -18,7 +18,6 @@ namespace GameZard.Services.AutoBackupService
         {
             MainModel = new MainModel();
             Watcher = new Watcher();
-            //Log.Information($"Selected Emulator: {dto.Name}");
         }
 
         public MainModel MainModel
